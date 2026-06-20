@@ -1,0 +1,253 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nuclia RAG-as-a-Service API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "X-NUCLIA-SERVICEACCOUNT",
+        "value": "Bearer {{serviceAccountToken}}",
+        "in": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Knowledge Boxes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a Knowledge Box",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{{zone}}.nuclia.cloud/api/v1/kb/{{kbid}}"
+          },
+          "docs": "Retrieve configuration and metadata for a Knowledge Box."
+        },
+        {
+          "info": {
+            "name": "Get Knowledge Box counters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{{zone}}.nuclia.cloud/api/v1/kb/{{kbid}}/counters"
+          },
+          "docs": "Return resource, paragraph, field and sentence counts for a Knowledge Box."
+        },
+        {
+          "info": {
+            "name": "Get label sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{{zone}}.nuclia.cloud/api/v1/kb/{{kbid}}/labelsets"
+          },
+          "docs": "Return all label sets configured on the Knowledge Box."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Resources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{{zone}}.nuclia.cloud/api/v1/kb/{{kbid}}/resource",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"title\": \"\",\n  \"texts\": {}\n}"
+            }
+          },
+          "docs": "Create a new resource in a Knowledge Box."
+        },
+        {
+          "info": {
+            "name": "List resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{{zone}}.nuclia.cloud/api/v1/kb/{{kbid}}/resources"
+          },
+          "docs": "List resources in a Knowledge Box with pagination."
+        },
+        {
+          "info": {
+            "name": "Get a resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{{zone}}.nuclia.cloud/api/v1/kb/{{kbid}}/resource/{{rid}}"
+          },
+          "docs": "Retrieve a resource by its id, optionally including extracted data."
+        },
+        {
+          "info": {
+            "name": "Upload a binary directly to a Knowledge Box",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{{zone}}.nuclia.cloud/api/v1/kb/{{kbid}}/upload",
+            "body": {
+              "type": "binary",
+              "data": ""
+            }
+          },
+          "docs": "Upload a binary file directly to a Knowledge Box; a resource is created and processed automatically."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search a Knowledge Box",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{{zone}}.nuclia.cloud/api/v1/kb/{{kbid}}/search",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"\"\n}"
+            }
+          },
+          "docs": "Run a hybrid search (semantic + keyword + fulltext) across a Knowledge Box."
+        },
+        {
+          "info": {
+            "name": "Find in a Knowledge Box",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{{zone}}.nuclia.cloud/api/v1/kb/{{kbid}}/find",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"\"\n}"
+            }
+          },
+          "docs": "Run a find query optimized for RAG context retrieval, including optional graph search."
+        },
+        {
+          "info": {
+            "name": "Suggest on a Knowledge Box",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{{zone}}.nuclia.cloud/api/v1/kb/{{kbid}}/suggest?query="
+          },
+          "docs": "Return autocomplete suggestions and entity matches for a partial query."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Ask",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ask a Knowledge Box (RAG generative answer)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{{zone}}.nuclia.cloud/api/v1/kb/{{kbid}}/ask",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"\"\n}"
+            }
+          },
+          "docs": "Ask a natural-language question; retrieves context and returns a cited generative answer, streamed as newline-delimited JSON / SSE."
+        },
+        {
+          "info": {
+            "name": "Summarize resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{{zone}}.nuclia.cloud/api/v1/kb/{{kbid}}/summarize",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"resources\": []\n}"
+            }
+          },
+          "docs": "Generate a summary across one or more resources in the Knowledge Box."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Predict",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Predict - generative chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{{zone}}.nuclia.cloud/api/v1/predict/chat",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"question\": \"\"\n}"
+            }
+          },
+          "docs": "Nuclia Understanding API generative endpoint; requires a NUA key (X-NUCLIA-NUAKEY)."
+        },
+        {
+          "info": {
+            "name": "Predict - tokenize / NER",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{{zone}}.nuclia.cloud/api/v1/predict/tokens?text="
+          },
+          "docs": "Tokenize input text and return named entities; requires a NUA key."
+        },
+        {
+          "info": {
+            "name": "Predict - embed sentence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{{zone}}.nuclia.cloud/api/v1/predict/sentence?text="
+          },
+          "docs": "Return the embedding vector for a sentence; requires a NUA key."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

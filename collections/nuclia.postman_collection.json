@@ -1,0 +1,379 @@
+{
+  "item": [
+    {
+      "id": "a1f0c2d3-0001-4a11-9c01-0000000000a1",
+      "name": "Knowledge Boxes",
+      "description": {
+        "content": "Create, configure and inspect Knowledge Boxes and their label sets.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1f0c2d3-0002-4a11-9c01-0000000000a2",
+          "name": "Get a Knowledge Box",
+          "request": {
+            "name": "Get a Knowledge Box",
+            "description": {
+              "content": "Retrieve configuration and metadata for a Knowledge Box.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/kb/{{kbid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "kb", "{{kbid}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c2d3-0003-4a11-9c01-0000000000a3",
+          "name": "Get Knowledge Box counters",
+          "request": {
+            "name": "Get Knowledge Box counters",
+            "description": {
+              "content": "Return resource, paragraph, field and sentence counts for a Knowledge Box.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/kb/{{kbid}}/counters",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "kb", "{{kbid}}", "counters"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a1f0c2d3-0010-4a11-9c01-0000000000b1",
+      "name": "Resources",
+      "description": {
+        "content": "Ingest and manage resources - files, text, links and conversations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1f0c2d3-0011-4a11-9c01-0000000000b2",
+          "name": "Create a resource",
+          "request": {
+            "name": "Create a resource",
+            "description": {
+              "content": "Create a new resource in a Knowledge Box.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/kb/{{kbid}}/resource",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "kb", "{{kbid}}", "resource"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"texts\": {}\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c2d3-0012-4a11-9c01-0000000000b3",
+          "name": "List resources",
+          "request": {
+            "name": "List resources",
+            "description": {
+              "content": "List resources in a Knowledge Box with pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/kb/{{kbid}}/resources",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "kb", "{{kbid}}", "resources"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c2d3-0013-4a11-9c01-0000000000b4",
+          "name": "Upload a binary directly to a Knowledge Box",
+          "request": {
+            "name": "Upload a binary directly to a Knowledge Box",
+            "description": {
+              "content": "Upload a binary file directly to a Knowledge Box; a resource is created and processed automatically.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/kb/{{kbid}}/upload",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "kb", "{{kbid}}", "upload"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/octet-stream" },
+              { "key": "X-Filename", "value": "document.pdf" }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": { "mode": "file", "file": {} }
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a1f0c2d3-0020-4a11-9c01-0000000000c1",
+      "name": "Search",
+      "description": {
+        "content": "Hybrid search, find (RAG retrieval) and suggest over a Knowledge Box.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1f0c2d3-0021-4a11-9c01-0000000000c2",
+          "name": "Search a Knowledge Box",
+          "request": {
+            "name": "Search a Knowledge Box",
+            "description": {
+              "content": "Run a hybrid search (semantic + keyword + fulltext) across a Knowledge Box.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/kb/{{kbid}}/search",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "kb", "{{kbid}}", "search"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"features\": [\"keyword\", \"semantic\"]\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c2d3-0022-4a11-9c01-0000000000c3",
+          "name": "Find in a Knowledge Box",
+          "request": {
+            "name": "Find in a Knowledge Box",
+            "description": {
+              "content": "Run a find query optimized for RAG context retrieval, including optional graph search.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/kb/{{kbid}}/find",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "kb", "{{kbid}}", "find"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a1f0c2d3-0030-4a11-9c01-0000000000d1",
+      "name": "Ask",
+      "description": {
+        "content": "Generative RAG answers, chat and summarization grounded in a Knowledge Box.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1f0c2d3-0031-4a11-9c01-0000000000d2",
+          "name": "Ask a Knowledge Box (RAG generative answer)",
+          "request": {
+            "name": "Ask a Knowledge Box (RAG generative answer)",
+            "description": {
+              "content": "Ask a natural-language question; retrieves context and returns a cited generative answer, streamed as newline-delimited JSON / SSE.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/kb/{{kbid}}/ask",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "kb", "{{kbid}}", "ask"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/x-ndjson" }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"citations\": true\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c2d3-0032-4a11-9c01-0000000000d3",
+          "name": "Summarize resources",
+          "request": {
+            "name": "Summarize resources",
+            "description": {
+              "content": "Generate a summary across one or more resources in the Knowledge Box.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/kb/{{kbid}}/summarize",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "kb", "{{kbid}}", "summarize"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resources\": []\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a1f0c2d3-0040-4a11-9c01-0000000000e1",
+      "name": "Predict",
+      "description": {
+        "content": "Nuclia Understanding API (NUA) - generation, summarize, embeddings and tokenization. Authenticated with a NUA key.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1f0c2d3-0041-4a11-9c01-0000000000e2",
+          "name": "Predict - generative chat",
+          "request": {
+            "name": "Predict - generative chat",
+            "description": {
+              "content": "Nuclia Understanding API generative endpoint; requires a NUA key.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/predict/chat",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "predict", "chat"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-NUCLIA-NUAKEY", "value": "Bearer {{nuaKey}}" }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"<string>\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c2d3-0042-4a11-9c01-0000000000e3",
+          "name": "Predict - tokenize / NER",
+          "request": {
+            "name": "Predict - tokenize / NER",
+            "description": {
+              "content": "Tokenize input text and return named entities; requires a NUA key.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/predict/tokens?text=",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "predict", "tokens"],
+              "query": [{ "key": "text", "value": "" }],
+              "variable": []
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "X-NUCLIA-NUAKEY", "value": "Bearer {{nuaKey}}" }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://europe-1.nuclia.cloud/api",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "europe-1",
+      "key": "zone"
+    },
+    {
+      "type": "string",
+      "value": "",
+      "key": "kbid"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "X-NUCLIA-SERVICEACCOUNT" },
+      { "key": "value", "value": "Bearer {{serviceAccountToken}}" },
+      { "key": "in", "value": "header" }
+    ]
+  },
+  "info": {
+    "_postman_id": "a1f0c2d3-0000-4a11-9c01-000000000000",
+    "name": "Nuclia RAG-as-a-Service API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the Nuclia (Progress Agentic RAG) cloud API - Knowledge Boxes, resources/ingestion, search/find, ask/chat RAG answers, and the Nuclia Understanding API (Predict). Served from a regional zone host.\n\nContact Support:\n Name: Nuclia Support\n URL: https://nuclia.com",
+      "type": "text/plain"
+    }
+  }
+}

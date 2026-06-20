@@ -1,0 +1,218 @@
+asyncapi: '2.6.0'
+id: 'urn:com:nuclia:kb:ask:stream'
+info:
+  title: Nuclia Ask / Chat Generative Answer Stream (HTTP + ndjson/SSE)
+  version: '1.0.0'
+  description: |
+    AsyncAPI 2.6 description of Nuclia's **ask / chat generative answer
+    streaming** surface.
+
+    Nuclia does not publish a WebSocket API. The only asynchronous / event-style
+    transport documented at https://docs.nuclia.dev/docs/rag/ and
+    https://docs.nuclia.dev/docs/api is **HTTP streaming** delivered over the
+    REST endpoint `POST /v1/kb/{kbid}/ask`. By default the answer is streamed
+    back as **newline-delimited JSON (application/x-ndjson)** - a sequence of
+    JSON items (retrieval results, answer chunks, citations, status) emitted as
+    they are produced. Setting the `X-Synchronous: true` header instead returns
+    a single buffered JSON answer. The streamed form is a one-way,
+    server-to-client HTTP channel; it is **not** WebSocket.
+
+    This AsyncAPI document models only the streamed items emitted by the ask
+    response. The request body (query, context, filters, generative_model,
+    prompt, etc.) is modeled in the companion OpenAPI document at
+    `openapi/nuclia-openapi.yml`.
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
+  license:
+    name: API documentation - Nuclia Terms and Conditions
+    url: https://nuclia.com/terms-and-conditions/
+  x-transport-notes:
+    transport: HTTP newline-delimited JSON (application/x-ndjson) / Server-Sent events
+    protocol: https
+    direction: server-to-client (one-way)
+    mediaType: application/x-ndjson
+    triggeredBy: 'POST https://{zone}.nuclia.cloud/api/v1/kb/{kbid}/ask (streamed unless X-Synchronous: true)'
+    notWebSocket: true
+    source: https://docs.nuclia.dev/docs/rag/
+defaultContentType: application/x-ndjson
+servers:
+  nuclia:
+    url: '{zone}.nuclia.cloud/api/v1'
+    protocol: https
+    description: |
+      Nuclia regional zone host. The ask/chat generative answer is delivered as
+      an HTTP newline-delimited JSON stream over this base. AsyncAPI 2.6 does
+      not define a dedicated ndjson/SSE protocol identifier; `https` is used
+      here and the HTTP streaming transport is documented in
+      info.x-transport-notes and on the channel.
+    variables:
+      zone:
+        default: europe-1
+        description: The Nuclia regional zone for your account.
+    security:
+      - apiKey: []
+channels:
+  /kb/{kbid}/ask:
+    description: |
+      Ask / chat generative answer stream. The client opens this channel by
+      issuing `POST /v1/kb/{kbid}/ask` with `Content-Type: application/json` and
+      a JSON body containing the question. Unless `X-Synchronous: true` is set,
+      the server responds with `Content-Type: application/x-ndjson` and emits an
+      ordered sequence of JSON items: an initial retrieval-results item, then
+      one or more answer-chunk items as the generative model produces tokens,
+      followed by citations and a terminal status item.
+    parameters:
+      kbid:
+        description: Unique identifier of the Knowledge Box being queried.
+        schema:
+          type: string
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.3.0'
+      x-ndjson:
+        mediaType: application/x-ndjson
+    subscribe:
+      operationId: streamAskItems
+      summary: Subscribe to streamed ask / chat answer items (HTTP ndjson).
+      description: |
+        After `POST /v1/kb/{kbid}/ask` is issued, the server emits an ordered
+        sequence of newline-delimited JSON items. Each line carries one item:
+        retrieval results, an answer text chunk, citations, or a final status.
+      bindings:
+        http:
+          type: response
+          bindingVersion: '0.3.0'
+      message:
+        oneOf:
+          - $ref: '#/components/messages/RetrievalItem'
+          - $ref: '#/components/messages/AnswerChunk'
+          - $ref: '#/components/messages/CitationsItem'
+          - $ref: '#/components/messages/StatusItem'
+components:
+  securitySchemes:
+    apiKey:
+      type: httpApiKey
+      in: header
+      name: X-NUCLIA-SERVICEACCOUNT
+      description: |
+        Knowledge Box service account API key. Set
+        `X-NUCLIA-SERVICEACCOUNT: Bearer <token>` on the POST /ask request that
+        opens the stream. Public Knowledge Boxes may be queried without a key.
+  messages:
+    RetrievalItem:
+      name: RetrievalItem
+      title: Retrieval results item
+      summary: The context retrieved (find results) used to ground the generative answer.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/RetrievalItem'
+      examples:
+        - name: retrieval
+          summary: Retrieved context
+          payload:
+            item_type: retrieval
+            results:
+              resources: {}
+              total: 3
+    AnswerChunk:
+      name: AnswerChunk
+      title: Answer text chunk
+      summary: An incremental slice of the generated answer text.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/AnswerChunk'
+      examples:
+        - name: chunk
+          summary: Token slice
+          payload:
+            item_type: answer
+            text: 'The contract renews '
+    CitationsItem:
+      name: CitationsItem
+      title: Citations item
+      summary: Mapping of cited resources / paragraphs supporting the answer.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/CitationsItem'
+      examples:
+        - name: citations
+          summary: Citations
+          payload:
+            item_type: citations
+            citations: {}
+    StatusItem:
+      name: StatusItem
+      title: Terminal status item
+      summary: Final item carrying the completion status and a learning id.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/StatusItem'
+      examples:
+        - name: status
+          summary: End-of-stream status
+          payload:
+            item_type: status
+            status: success
+            learning_id: ln_01jbd6g2qdfw2adyrt2az8hz4w
+  schemas:
+    RetrievalItem:
+      type: object
+      required:
+        - item_type
+      properties:
+        item_type:
+          type: string
+          enum:
+            - retrieval
+        results:
+          type: object
+          description: Find results (resources, paragraphs, relations) used as context.
+    AnswerChunk:
+      type: object
+      required:
+        - item_type
+        - text
+      properties:
+        item_type:
+          type: string
+          enum:
+            - answer
+        text:
+          type: string
+          description: Incremental answer text slice. Concatenate successive chunks for the full answer.
+    CitationsItem:
+      type: object
+      required:
+        - item_type
+      properties:
+        item_type:
+          type: string
+          enum:
+            - citations
+        citations:
+          type: object
+          description: Cited resources / paragraphs keyed by reference.
+    StatusItem:
+      type: object
+      required:
+        - item_type
+        - status
+      properties:
+        item_type:
+          type: string
+          enum:
+            - status
+        status:
+          type: string
+          enum:
+            - success
+            - error
+            - no_context
+          description: Final completion status of the generative answer.
+        learning_id:
+          type: string
+          description: Identifier correlating the answer for feedback / learning.

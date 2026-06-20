@@ -1,0 +1,86 @@
+aid: nuclia
+name: Nuclia
+review:
+  question: Does Nuclia expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: true
+  asyncapiScopeNote: |
+    Per updated API Evangelist scope (2026-05-29), HTTP streaming (Server-Sent
+    Events and newline-delimited JSON) is in-scope for AsyncAPI modeling. An
+    AsyncAPI 2.6 document was created at asyncapi/nuclia-asyncapi.yml describing
+    the ask/chat generative answer stream (POST /v1/kb/{kbid}/ask). No WebSocket
+    surface was modeled because none is documented.
+findings:
+  summary: |
+    Nuclia (Progress Agentic RAG) does not publish a documented public
+    WebSocket API. The platform exposes a REST (HTTPS) API served from a
+    regional zone host (https://{zone}.nuclia.cloud/api, also served from
+    https://{region}.rag.progress.cloud/api following the Progress rebrand)
+    covering Knowledge Boxes, resource ingestion, search/find, ask/chat RAG
+    answers, and the Nuclia Understanding API (NUA / Predict). Generative
+    answers from the ask endpoint are streamed back over HTTP as
+    newline-delimited JSON (application/x-ndjson) / Server-Sent events; this is
+    a one-way HTTP streaming transport and is not WebSocket. A KB notifications
+    stream (GET /v1/kb/{kbid}/notifications) is likewise delivered as an HTTP
+    event stream, not WebSocket. No realtime bidirectional ws:// or wss://
+    endpoint is documented.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://{zone}.nuclia.cloud/api/v1
+      documented: true
+    - protocol: SSE
+      scheme: https
+      note: Ask/chat generative answers stream over HTTP as newline-delimited JSON / Server-Sent events from POST /v1/kb/{kbid}/ask. Not WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Nuclia's REST API, NUA API, or product pages as of the review date.
+  endpointsConfirmedRest:
+    - GET    https://{zone}.nuclia.cloud/api/v1/kb/{kbid}
+    - GET    https://{zone}.nuclia.cloud/api/v1/kb/{kbid}/counters
+    - POST   https://{zone}.nuclia.cloud/api/v1/kb/{kbid}/resource
+    - GET    https://{zone}.nuclia.cloud/api/v1/kb/{kbid}/resources
+    - GET    https://{zone}.nuclia.cloud/api/v1/kb/{kbid}/resource/{rid}
+    - PATCH  https://{zone}.nuclia.cloud/api/v1/kb/{kbid}/resource/{rid}
+    - DELETE https://{zone}.nuclia.cloud/api/v1/kb/{kbid}/resource/{rid}
+    - PUT    https://{zone}.nuclia.cloud/api/v1/kb/{kbid}/resource/{rid}/file/{field}
+    - POST   https://{zone}.nuclia.cloud/api/v1/kb/{kbid}/upload
+    - POST   https://{zone}.nuclia.cloud/api/v1/kb/{kbid}/search
+    - POST   https://{zone}.nuclia.cloud/api/v1/kb/{kbid}/find
+    - GET    https://{zone}.nuclia.cloud/api/v1/kb/{kbid}/suggest
+    - POST   https://{zone}.nuclia.cloud/api/v1/kb/{kbid}/ask
+    - POST   https://{zone}.nuclia.cloud/api/v1/kb/{kbid}/summarize
+    - POST   https://{zone}.nuclia.cloud/api/v1/predict/chat
+    - POST   https://{zone}.nuclia.cloud/api/v1/predict/summarize
+    - POST   https://{zone}.nuclia.cloud/api/v1/predict/rephrase
+    - POST   https://{zone}.nuclia.cloud/api/v1/predict/rerank
+    - GET    https://{zone}.nuclia.cloud/api/v1/predict/tokens
+    - GET    https://{zone}.nuclia.cloud/api/v1/predict/sentence
+    - GET    https://{zone}.nuclia.cloud/api/v1/predict/models
+sources:
+  - url: https://docs.nuclia.dev/docs/api
+    type: APIReference
+    note: NucliaDB REST API reference; all documented endpoints are HTTPS REST under the regional zone host.
+  - url: https://docs.nuclia.dev/docs/nua-api/
+    type: APIReference
+    note: Nuclia Understanding API (Predict) reference; all endpoints are HTTPS REST.
+  - url: https://docs.nuclia.dev/docs/rag/
+    type: Documentation
+    note: Ask/chat returns generative answers streamed as newline-delimited JSON / SSE over HTTPS, not WebSocket.
+  - url: https://nuclia.com/
+    type: Website
+    note: Product overview; no WebSocket transport mentioned.
+actions:
+  asyncapiPath: asyncapi/nuclia-asyncapi.yml
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Under the updated 2026-05-29 scope
+    that allows HTTP streaming in AsyncAPI, an AsyncAPI 2.6 document was
+    authored for the ask/chat generative answer stream, with HTTP + ndjson/SSE
+    transport documented explicitly throughout (server protocol, channel
+    bindings, info.x-transport-notes) so the stream is never misrepresented as
+    WebSocket.

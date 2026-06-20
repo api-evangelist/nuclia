@@ -1,0 +1,157 @@
+aid: nuclia
+url: https://raw.githubusercontent.com/api-evangelist/nuclia/refs/heads/main/apis.yml
+name: Nuclia
+kind: company
+description: Nuclia is a RAG-as-a-Service / AI search platform (now part of Progress
+  as Progress Agentic RAG). It ingests unstructured data - documents, files, audio,
+  video, web pages and conversations - into Knowledge Boxes, automatically extracting,
+  embedding and indexing it so applications can run hybrid (semantic, keyword, graph)
+  search and get grounded generative answers through a regional REST API.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- AI
+- RAG
+- Search
+- Knowledge Base
+- Unstructured Data
+created: '2026-06-20'
+modified: '2026-06-20'
+specificationVersion: '0.19'
+apis:
+- aid: nuclia:knowledge-boxes-api
+  name: Nuclia Knowledge Boxes API
+  tags:
+  - Knowledge Boxes
+  - Configuration
+  - Labels
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.nuclia.dev/docs/api
+  baseURL: https://{zone}.nuclia.cloud/api/v1
+  properties:
+  - url: https://docs.nuclia.dev/docs/management/knowledgebox/
+    type: Documentation
+  - url: https://docs.nuclia.dev/docs/api
+    type: APIReference
+  - url: openapi/nuclia-openapi.yml
+    type: OpenAPI
+  - url: collections/nuclia.postman_collection.json
+    type: PostmanCollection
+  - url: collections/nuclia.opencollection.json
+    type: OpenCollection
+  description: Create, configure and inspect Knowledge Boxes - the indexed collections
+    of unstructured data - including counters, label sets, synonyms, entities and
+    model configuration.
+- aid: nuclia:resources-ingestion-api
+  name: Nuclia Resources & Ingestion API
+  tags:
+  - Resources
+  - Ingestion
+  - Upload
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.nuclia.dev/docs/api
+  baseURL: https://{zone}.nuclia.cloud/api/v1
+  properties:
+  - url: https://docs.nuclia.dev/docs/ingestion/
+    type: Documentation
+  - url: https://docs.nuclia.dev/docs/api
+    type: APIReference
+  - url: openapi/nuclia-openapi.yml
+    type: OpenAPI
+  - url: collections/nuclia.postman_collection.json
+    type: PostmanCollection
+  - url: collections/nuclia.opencollection.json
+    type: OpenCollection
+  description: Create, list, read, modify and delete resources, and upload binaries
+    (including TUS resumable uploads and direct Knowledge Box upload) into Nuclia's
+    extraction, embedding and indexing pipeline.
+- aid: nuclia:search-find-api
+  name: Nuclia Search & Find API
+  tags:
+  - Search
+  - Find
+  - Semantic Search
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.nuclia.dev/docs/rag/search-strategy/
+  baseURL: https://{zone}.nuclia.cloud/api/v1
+  properties:
+  - url: https://docs.nuclia.dev/docs/rag/search-strategy/
+    type: Documentation
+  - url: https://docs.nuclia.dev/docs/api
+    type: APIReference
+  - url: openapi/nuclia-openapi.yml
+    type: OpenAPI
+  - url: collections/nuclia.postman_collection.json
+    type: PostmanCollection
+  - url: collections/nuclia.opencollection.json
+    type: OpenCollection
+  description: Hybrid search combining semantic, keyword, fulltext and graph search,
+    the find endpoint optimized for RAG context retrieval, plus suggest autocomplete
+    over a Knowledge Box.
+- aid: nuclia:ask-chat-rag-api
+  name: Nuclia Ask & Chat (RAG) API
+  tags:
+  - Ask
+  - Chat
+  - RAG
+  - Generative
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.nuclia.dev/docs/rag/
+  baseURL: https://{zone}.nuclia.cloud/api/v1
+  properties:
+  - url: https://docs.nuclia.dev/docs/rag/
+    type: Documentation
+  - url: https://docs.nuclia.dev/docs/api
+    type: APIReference
+  - url: openapi/nuclia-openapi.yml
+    type: OpenAPI
+  - url: asyncapi/nuclia-asyncapi.yml
+    type: AsyncAPI
+  - url: collections/nuclia.postman_collection.json
+    type: PostmanCollection
+  - url: collections/nuclia.opencollection.json
+    type: OpenCollection
+  description: Generative RAG answers grounded in a Knowledge Box - the ask/chat
+    endpoint retrieves context, builds a prompt and returns a cited answer, streamed
+    as newline-delimited JSON / SSE, plus document summarization.
+- aid: nuclia:predict-nua-api
+  name: Nuclia Predict (NUA) API
+  tags:
+  - Predict
+  - NUA
+  - Embeddings
+  - Tokens
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.nuclia.dev/docs/nua-api/
+  baseURL: https://{zone}.nuclia.cloud/api/v1
+  properties:
+  - url: https://docs.nuclia.dev/docs/understanding/intro
+    type: Documentation
+  - url: https://docs.nuclia.dev/docs/nua-api/
+    type: APIReference
+  - url: openapi/nuclia-openapi.yml
+    type: OpenAPI
+  - url: collections/nuclia.postman_collection.json
+    type: PostmanCollection
+  - url: collections/nuclia.opencollection.json
+    type: OpenCollection
+  description: The Nuclia Understanding API - generative chat/completions, summarize,
+    rephrase, rerank, sentence embeddings and token/NER extraction - authenticated
+    with a NUA key.
+common:
+- type: GitHubOrganization
+  url: https://github.com/nuclia
+- type: LinkedIn
+  url: https://www.linkedin.com/company/nuclia
+- type: Website
+  url: https://nuclia.com/
+- type: Documentation
+  url: https://docs.nuclia.dev/docs
+- type: Plans
+  url: plans/nuclia-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/nuclia-rate-limits.yml
+- type: FinOps
+  url: finops/nuclia-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

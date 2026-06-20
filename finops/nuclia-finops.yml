@@ -1,0 +1,106 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Nuclia
+providerId: nuclia
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- AI
+- RAG
+- Search
+- Knowledge Base
+- Unstructured Data
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Nuclia (Progress Agentic RAG) spend. Nuclia bills a flat
+  monthly subscription per plan (Starter, Pro, Enterprise) that bundles a
+  Knowledge Box count, an indexed-data quota and a monthly Nuclia token
+  allowance. The token is the unit of consumption across processing, search,
+  generative answers and stored indexed data; usage above the allowance is
+  billed at $0.008 per token, and each extra GB of indexed data costs 500
+  tokens/month. Additional Knowledge Boxes on Pro cost $750/month each.
+notes: >-
+  Subscription prices, token allowances and the per-token overage rate are
+  subject to change; verify against the Nuclia / Progress pricing page during
+  reconciliation.
+sources:
+- https://nuclia.com/pricing/
+- https://www.progress.com/agentic-rag/pricing
+- https://docs.nuclia.dev/docs
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Nuclia
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Subscription-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: Nuclia RAG-as-a-Service
+  ServiceCategory: AI and Machine Learning
+  ProviderName: Nuclia
+  PublisherName: Progress
+  InvoiceIssuerName: Progress
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription-Based
+meters:
+- name: subscription_fee
+  description: Flat monthly subscription fee per plan (Starter, Pro, Enterprise).
+  unit: month
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: included_tokens
+  description: Monthly Nuclia token allowance bundled with the subscription plan.
+  unit: tokens
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: overage_tokens
+  description: Tokens consumed above the plan allowance, billed at $0.008 per token.
+  unit: tokens
+  aggregation: sum
+  dimensions:
+  - account
+  - knowledge_box
+- name: indexed_data
+  description: Indexed data stored; extra GB beyond the plan quota costs 500 tokens/month per GB.
+  unit: gigabytes
+  aggregation: max
+  dimensions:
+  - account
+  - knowledge_box
+- name: extra_knowledge_boxes
+  description: Additional Knowledge Boxes beyond the plan allowance ($750/month each on Pro).
+  unit: knowledge_boxes
+  aggregation: max
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Track token consumption and indexed-data growth per Knowledge Box in the Nuclia dashboard.
+- name: Allocation
+  description: Map Knowledge Boxes and service-account keys to teams / workloads and internal cost centers.
+- name: Optimization
+  description: Prune stale resources to free indexed-data quota; right-size the plan to the token allowance; consolidate workloads into fewer Knowledge Boxes where possible.
+- name: Accountability
+  description: Assign owners per Knowledge Box; review monthly token overage and storage against budget.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
