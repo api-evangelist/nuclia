@@ -138,6 +138,12 @@ apis:
     rephrase, rerank, sentence embeddings and token/NER extraction - authenticated
     with a NUA key.
 common:
+- type: TrustCenter
+  url: security/nuclia-trust-center.yml
+- type: DomainSecurity
+  url: security/nuclia-domain-security.yml
+- type: Authentication
+  url: authentication/nuclia-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/nuclia
 - type: LinkedIn

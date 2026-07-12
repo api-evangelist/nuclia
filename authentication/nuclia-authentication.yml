@@ -1,0 +1,36 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/nuclia-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: X-NUCLIA-SERVICEACCOUNT
+  description: 'Knowledge Box service account API key. Pass as `X-NUCLIA-SERVICEACCOUNT: Bearer
+    <token>`. Reader keys allow search/find/ask, Writer keys allow ingestion and resource modification,
+    Manager keys allow administration. Public search endpoints may be called without a key when
+    the Knowledge Box is public.'
+  sources:
+  - openapi/nuclia-openapi.yml
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: OAuth2 / account bearer token obtained from the Nuclia authentication service,
+    used by the dashboard and management endpoints.
+  sources:
+  - openapi/nuclia-openapi.yml
+- name: nuaKey
+  type: apiKey
+  in: header
+  parameter: X-NUCLIA-NUAKEY
+  description: 'Nuclia Understanding API (NUA) key. Pass as `X-NUCLIA-NUAKEY: Bearer <token>`
+    to call the /v1/predict endpoints.'
+  sources:
+  - openapi/nuclia-openapi.yml
