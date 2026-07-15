@@ -138,6 +138,8 @@ apis:
     rephrase, rerank, sentence embeddings and token/NER extraction - authenticated
     with a NUA key.
 common:
+- type: AgenticAccess
+  url: agentic-access/nuclia-agentic-access.yml
 - type: TrustCenter
   url: security/nuclia-trust-center.yml
 - type: DomainSecurity
