@@ -1,0 +1,243 @@
+openapi: 3.0.1
+info:
+  title: Nuclia RAG-as-a-Service Ask Predict API
+  description: Specification of the Nuclia (Progress Agentic RAG) cloud API. Nuclia turns unstructured data - documents, files, audio, video, web pages and conversations - into searchable, queryable Knowledge Boxes. This document covers the regional NucliaDB REST API (Knowledge Boxes, resources and ingestion, search, find, ask/chat RAG answers) and the Nuclia Understanding API (NUA / Predict) endpoints. All endpoints are served from a regional zone host.
+  termsOfService: https://nuclia.com/terms-and-conditions/
+  contact:
+    name: Nuclia Support
+    url: https://nuclia.com
+  version: '1.0'
+servers:
+- url: https://{zone}.nuclia.cloud/api
+  description: Regional Nuclia cloud zone host. Replace {zone} with your account region (for example europe-1 or aws-us-east-2-1). Following the Progress rebrand the same surface is also served from https://{region}.rag.progress.cloud/api.
+  variables:
+    zone:
+      default: europe-1
+      description: The Nuclia regional zone for your account.
+security:
+- apiKey: []
+tags:
+- name: Predict
+  description: Nuclia Understanding API (NUA) - generation, summarize, rephrase, rerank, embeddings and tokenization.
+paths:
+  /v1/predict/chat:
+    post:
+      operationId: predictChat
+      tags:
+      - Predict
+      summary: Predict - generative chat
+      description: Nuclia Understanding API generative endpoint. Send a question with context and receive a generated answer from the configured LLM. Streams tokens back as they are produced. Authenticated with a NUA key.
+      security:
+      - nuaKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PredictChatRequest'
+      responses:
+        '200':
+          description: Generated answer (streamed)
+          content:
+            application/json:
+              schema:
+                type: object
+  /v1/predict/summarize:
+    post:
+      operationId: predictSummarize
+      tags:
+      - Predict
+      summary: Predict - summarize
+      description: Summarize supplied text using the Nuclia Understanding API.
+      security:
+      - nuaKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SummarizeRequest'
+      responses:
+        '200':
+          description: Summary
+          content:
+            application/json:
+              schema:
+                type: object
+  /v1/predict/rephrase:
+    post:
+      operationId: predictRephrase
+      tags:
+      - Predict
+      summary: Predict - rephrase
+      description: Rephrase a user question into an optimized search query.
+      security:
+      - nuaKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+      responses:
+        '200':
+          description: Rephrased query
+          content:
+            application/json:
+              schema:
+                type: object
+  /v1/predict/tokens:
+    get:
+      operationId: predictTokens
+      tags:
+      - Predict
+      summary: Predict - tokenize / NER
+      description: Tokenize input text and return named entities (NER) detected by the Nuclia Understanding API.
+      security:
+      - nuaKey: []
+      parameters:
+      - name: text
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Tokens and entities
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokensResponse'
+  /v1/predict/sentence:
+    get:
+      operationId: predictSentence
+      tags:
+      - Predict
+      summary: Predict - embed sentence
+      description: Return the embedding vector for a sentence using the configured semantic model.
+      security:
+      - nuaKey: []
+      parameters:
+      - name: text
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Sentence embedding
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: number
+  /v1/predict/rerank:
+    post:
+      operationId: predictRerank
+      tags:
+      - Predict
+      summary: Predict - rerank
+      description: Rerank a set of retrieved passages against a question for improved relevance.
+      security:
+      - nuaKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Reranked results
+          content:
+            application/json:
+              schema:
+                type: object
+  /v1/predict/models:
+    get:
+      operationId: listPredictModels
+      tags:
+      - Predict
+      summary: Predict - list models
+      description: List the generative and semantic models available to the account.
+      security:
+      - nuaKey: []
+      responses:
+        '200':
+          description: Available models
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    PredictChatRequest:
+      type: object
+      required:
+      - question
+      properties:
+        question:
+          type: string
+        query_context:
+          type: array
+          items:
+            type: string
+        user_id:
+          type: string
+        generative_model:
+          type: string
+    SummarizeRequest:
+      type: object
+      properties:
+        resources:
+          type: array
+          items:
+            type: string
+        generative_model:
+          type: string
+        summary_kind:
+          type: string
+          enum:
+          - simple
+          - extended
+    TokensResponse:
+      type: object
+      properties:
+        tokens:
+          type: array
+          items:
+            type: object
+            properties:
+              text:
+                type: string
+              ner:
+                type: string
+              start:
+                type: integer
+              end:
+                type: integer
+        time:
+          type: number
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-NUCLIA-SERVICEACCOUNT
+      description: 'Knowledge Box service account API key. Pass as `X-NUCLIA-SERVICEACCOUNT: Bearer <token>`. Reader keys allow search/find/ask, Writer keys allow ingestion and resource modification, Manager keys allow administration. Public search endpoints may be called without a key when the Knowledge Box is public.'
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth2 / account bearer token obtained from the Nuclia authentication service, used by the dashboard and management endpoints.
+    nuaKey:
+      type: apiKey
+      in: header
+      name: X-NUCLIA-NUAKEY
+      description: 'Nuclia Understanding API (NUA) key. Pass as `X-NUCLIA-NUAKEY: Bearer <token>` to call the /v1/predict endpoints.'

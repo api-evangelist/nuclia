@@ -1,0 +1,195 @@
+openapi: 3.0.1
+info:
+  title: Nuclia RAG-as-a-Service Ask API
+  description: Specification of the Nuclia (Progress Agentic RAG) cloud API. Nuclia turns unstructured data - documents, files, audio, video, web pages and conversations - into searchable, queryable Knowledge Boxes. This document covers the regional NucliaDB REST API (Knowledge Boxes, resources and ingestion, search, find, ask/chat RAG answers) and the Nuclia Understanding API (NUA / Predict) endpoints. All endpoints are served from a regional zone host.
+  termsOfService: https://nuclia.com/terms-and-conditions/
+  contact:
+    name: Nuclia Support
+    url: https://nuclia.com
+  version: '1.0'
+servers:
+- url: https://{zone}.nuclia.cloud/api
+  description: Regional Nuclia cloud zone host. Replace {zone} with your account region (for example europe-1 or aws-us-east-2-1). Following the Progress rebrand the same surface is also served from https://{region}.rag.progress.cloud/api.
+  variables:
+    zone:
+      default: europe-1
+      description: The Nuclia regional zone for your account.
+security:
+- apiKey: []
+tags:
+- name: Ask
+  description: Generative RAG answers, chat and summarization grounded in a Knowledge Box.
+paths:
+  /v1/kb/{kbid}/ask:
+    post:
+      operationId: ask
+      tags:
+      - Ask
+      summary: Ask a Knowledge Box (RAG generative answer)
+      description: 'Ask a natural-language question against a Knowledge Box. Nuclia retrieves the most relevant context (semantic, keyword and graph search), builds a prompt and returns a generative answer with the supporting resources as citations. When the request sets `Accept: application/x-ndjson` (or the SDK streaming flag), the answer is streamed back as newline-delimited JSON / Server-Sent events.'
+      parameters:
+      - $ref: '#/components/parameters/Kbid'
+      - name: X-Synchronous
+        in: header
+        description: Set to true to receive a single buffered JSON answer instead of a stream.
+        schema:
+          type: boolean
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AskRequest'
+      responses:
+        '200':
+          description: Generative answer. Streamed as application/x-ndjson by default, or a single AskResponse object when X-Synchronous is true.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AskResponse'
+            application/x-ndjson:
+              schema:
+                $ref: '#/components/schemas/AskResponse'
+  /v1/kb/{kbid}/summarize:
+    post:
+      operationId: summarize
+      tags:
+      - Ask
+      summary: Summarize resources
+      description: Generate a summary across one or more resources in the Knowledge Box.
+      parameters:
+      - $ref: '#/components/parameters/Kbid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SummarizeRequest'
+      responses:
+        '200':
+          description: Summary
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  summary:
+                    type: string
+components:
+  schemas:
+    AskResponse:
+      type: object
+      properties:
+        answer:
+          type: string
+          description: The generated answer text. Streamed incrementally when not synchronous.
+        relations:
+          type: object
+        retrieval_results:
+          $ref: '#/components/schemas/FindResults'
+        citations:
+          type: object
+          description: Mapping of cited resources / paragraphs supporting the answer.
+        learning_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - error
+          - no_context
+    SummarizeRequest:
+      type: object
+      properties:
+        resources:
+          type: array
+          items:
+            type: string
+        generative_model:
+          type: string
+        summary_kind:
+          type: string
+          enum:
+          - simple
+          - extended
+    FindResults:
+      type: object
+      properties:
+        resources:
+          type: object
+          description: Resources keyed by id, each with scored matching paragraphs.
+        relations:
+          type: object
+        total:
+          type: integer
+        next_page:
+          type: boolean
+    AskRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: The natural-language question to answer.
+        context:
+          type: array
+          description: Prior conversation turns for multi-turn chat.
+          items:
+            type: object
+            properties:
+              author:
+                type: string
+                enum:
+                - USER
+                - NUCLIA
+              text:
+                type: string
+        filters:
+          type: array
+          items:
+            type: string
+        features:
+          type: array
+          items:
+            type: string
+            enum:
+            - keyword
+            - semantic
+            - relations
+        generative_model:
+          type: string
+          description: Override the generative model used to produce the answer.
+        prompt:
+          type: string
+          description: Custom prompt template wrapping the retrieved context.
+        citations:
+          type: boolean
+        rephrase:
+          type: boolean
+        max_tokens:
+          type: integer
+  parameters:
+    Kbid:
+      name: kbid
+      in: path
+      required: true
+      description: Unique identifier of the Knowledge Box.
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-NUCLIA-SERVICEACCOUNT
+      description: 'Knowledge Box service account API key. Pass as `X-NUCLIA-SERVICEACCOUNT: Bearer <token>`. Reader keys allow search/find/ask, Writer keys allow ingestion and resource modification, Manager keys allow administration. Public search endpoints may be called without a key when the Knowledge Box is public.'
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth2 / account bearer token obtained from the Nuclia authentication service, used by the dashboard and management endpoints.
+    nuaKey:
+      type: apiKey
+      in: header
+      name: X-NUCLIA-NUAKEY
+      description: 'Nuclia Understanding API (NUA) key. Pass as `X-NUCLIA-NUAKEY: Bearer <token>` to call the /v1/predict endpoints.'

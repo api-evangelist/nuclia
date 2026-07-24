@@ -1,0 +1,326 @@
+openapi: 3.0.1
+info:
+  title: Nuclia RAG-as-a-Service Ask Resources API
+  description: Specification of the Nuclia (Progress Agentic RAG) cloud API. Nuclia turns unstructured data - documents, files, audio, video, web pages and conversations - into searchable, queryable Knowledge Boxes. This document covers the regional NucliaDB REST API (Knowledge Boxes, resources and ingestion, search, find, ask/chat RAG answers) and the Nuclia Understanding API (NUA / Predict) endpoints. All endpoints are served from a regional zone host.
+  termsOfService: https://nuclia.com/terms-and-conditions/
+  contact:
+    name: Nuclia Support
+    url: https://nuclia.com
+  version: '1.0'
+servers:
+- url: https://{zone}.nuclia.cloud/api
+  description: Regional Nuclia cloud zone host. Replace {zone} with your account region (for example europe-1 or aws-us-east-2-1). Following the Progress rebrand the same surface is also served from https://{region}.rag.progress.cloud/api.
+  variables:
+    zone:
+      default: europe-1
+      description: The Nuclia regional zone for your account.
+security:
+- apiKey: []
+tags:
+- name: Resources
+  description: Ingest and manage resources - files, text, links and conversations.
+paths:
+  /v1/kb/{kbid}/resource:
+    post:
+      operationId: createResource
+      tags:
+      - Resources
+      summary: Create a resource
+      description: Create a new resource in a Knowledge Box. Text, link, file and conversation fields may be supplied inline; uploaded binaries are processed asynchronously and indexed for search.
+      parameters:
+      - $ref: '#/components/parameters/Kbid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateResourcePayload'
+      responses:
+        '201':
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCreated'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /v1/kb/{kbid}/resources:
+    get:
+      operationId: listResources
+      tags:
+      - Resources
+      summary: List resources
+      description: List resources in a Knowledge Box with pagination.
+      parameters:
+      - $ref: '#/components/parameters/Kbid'
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        schema:
+          type: integer
+          default: 20
+      responses:
+        '200':
+          description: Paginated resource list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceList'
+  /v1/kb/{kbid}/resource/{rid}:
+    get:
+      operationId: getResource
+      tags:
+      - Resources
+      summary: Get a resource
+      description: Retrieve a resource by its id, optionally including extracted data.
+      parameters:
+      - $ref: '#/components/parameters/Kbid'
+      - $ref: '#/components/parameters/Rid'
+      - name: show
+        in: query
+        description: Parts of the resource to return (basic, values, extracted, errors).
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: modifyResource
+      tags:
+      - Resources
+      summary: Modify a resource
+      description: Update fields, metadata or labels of an existing resource.
+      parameters:
+      - $ref: '#/components/parameters/Kbid'
+      - $ref: '#/components/parameters/Rid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateResourcePayload'
+      responses:
+        '200':
+          description: Resource modified
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    delete:
+      operationId: deleteResource
+      tags:
+      - Resources
+      summary: Delete a resource
+      description: Delete a resource and its indexed data from the Knowledge Box.
+      parameters:
+      - $ref: '#/components/parameters/Kbid'
+      - $ref: '#/components/parameters/Rid'
+      responses:
+        '204':
+          description: Resource deleted
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /v1/kb/{kbid}/resource/{rid}/file/{field}:
+    put:
+      operationId: uploadFileField
+      tags:
+      - Resources
+      summary: Upload a file field
+      description: Upload a binary file into a file field of a resource. The file is sent through Nuclia's processing pipeline (extraction, embedding, indexing). Large files should use the TUS resumable upload endpoint.
+      parameters:
+      - $ref: '#/components/parameters/Kbid'
+      - $ref: '#/components/parameters/Rid'
+      - name: field
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Filename
+        in: header
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: File field stored and queued for processing
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /v1/kb/{kbid}/upload:
+    post:
+      operationId: uploadToKnowledgeBox
+      tags:
+      - Resources
+      summary: Upload a binary directly to a Knowledge Box
+      description: Upload a binary file directly to a Knowledge Box. Nuclia creates a resource automatically and runs the file through the processing pipeline for extraction, embedding and indexing.
+      parameters:
+      - $ref: '#/components/parameters/Kbid'
+      - name: X-Filename
+        in: header
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: Resource created from upload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCreated'
+components:
+  schemas:
+    Resource:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        title:
+          type: string
+        summary:
+          type: string
+        created:
+          type: string
+          format: date-time
+        data:
+          type: object
+        extracted:
+          type: object
+    ResourceCreated:
+      type: object
+      properties:
+        uuid:
+          type: string
+        seqid:
+          type: integer
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+    ResourceList:
+      type: object
+      properties:
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+        pagination:
+          type: object
+          properties:
+            page:
+              type: integer
+            size:
+              type: integer
+            total:
+              type: integer
+    CreateResourcePayload:
+      type: object
+      properties:
+        slug:
+          type: string
+        title:
+          type: string
+        summary:
+          type: string
+        icon:
+          type: string
+        usermetadata:
+          type: object
+          properties:
+            classifications:
+              type: array
+              items:
+                type: object
+                properties:
+                  labelset:
+                    type: string
+                  label:
+                    type: string
+        texts:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              body:
+                type: string
+              format:
+                type: string
+                enum:
+                - PLAIN
+                - HTML
+                - MARKDOWN
+                - RST
+        links:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              uri:
+                type: string
+  parameters:
+    Rid:
+      name: rid
+      in: path
+      required: true
+      description: Unique identifier of the resource.
+      schema:
+        type: string
+    Kbid:
+      name: kbid
+      in: path
+      required: true
+      description: Unique identifier of the Knowledge Box.
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: The requested object was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: The API key does not grant the required role for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-NUCLIA-SERVICEACCOUNT
+      description: 'Knowledge Box service account API key. Pass as `X-NUCLIA-SERVICEACCOUNT: Bearer <token>`. Reader keys allow search/find/ask, Writer keys allow ingestion and resource modification, Manager keys allow administration. Public search endpoints may be called without a key when the Knowledge Box is public.'
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth2 / account bearer token obtained from the Nuclia authentication service, used by the dashboard and management endpoints.
+    nuaKey:
+      type: apiKey
+      in: header
+      name: X-NUCLIA-NUAKEY
+      description: 'Nuclia Understanding API (NUA) key. Pass as `X-NUCLIA-NUAKEY: Bearer <token>` to call the /v1/predict endpoints.'

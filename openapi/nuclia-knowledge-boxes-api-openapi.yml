@@ -1,0 +1,177 @@
+openapi: 3.0.1
+info:
+  title: Nuclia RAG-as-a-Service Ask Knowledge Boxes API
+  description: Specification of the Nuclia (Progress Agentic RAG) cloud API. Nuclia turns unstructured data - documents, files, audio, video, web pages and conversations - into searchable, queryable Knowledge Boxes. This document covers the regional NucliaDB REST API (Knowledge Boxes, resources and ingestion, search, find, ask/chat RAG answers) and the Nuclia Understanding API (NUA / Predict) endpoints. All endpoints are served from a regional zone host.
+  termsOfService: https://nuclia.com/terms-and-conditions/
+  contact:
+    name: Nuclia Support
+    url: https://nuclia.com
+  version: '1.0'
+servers:
+- url: https://{zone}.nuclia.cloud/api
+  description: Regional Nuclia cloud zone host. Replace {zone} with your account region (for example europe-1 or aws-us-east-2-1). Following the Progress rebrand the same surface is also served from https://{region}.rag.progress.cloud/api.
+  variables:
+    zone:
+      default: europe-1
+      description: The Nuclia regional zone for your account.
+security:
+- apiKey: []
+tags:
+- name: Knowledge Boxes
+  description: Create, configure and inspect Knowledge Boxes and their label sets.
+paths:
+  /v1/kb/{kbid}:
+    get:
+      operationId: getKnowledgeBox
+      tags:
+      - Knowledge Boxes
+      summary: Get a Knowledge Box
+      description: Retrieve configuration and metadata for a Knowledge Box.
+      parameters:
+      - $ref: '#/components/parameters/Kbid'
+      responses:
+        '200':
+          description: Knowledge Box configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KnowledgeBox'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /v1/kb/{kbid}/counters:
+    get:
+      operationId: getKnowledgeBoxCounters
+      tags:
+      - Knowledge Boxes
+      summary: Get Knowledge Box counters
+      description: Return resource, paragraph, field and sentence counts for a Knowledge Box.
+      parameters:
+      - $ref: '#/components/parameters/Kbid'
+      responses:
+        '200':
+          description: Knowledge Box counters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Counters'
+  /v1/kb/{kbid}/labelsets:
+    get:
+      operationId: getLabelSets
+      tags:
+      - Knowledge Boxes
+      summary: Get label sets
+      description: Return all label sets configured on the Knowledge Box.
+      parameters:
+      - $ref: '#/components/parameters/Kbid'
+      responses:
+        '200':
+          description: Label sets
+          content:
+            application/json:
+              schema:
+                type: object
+  /v1/kb/{kbid}/labelset/{labelset}:
+    put:
+      operationId: setLabelSet
+      tags:
+      - Knowledge Boxes
+      summary: Set a label set
+      description: Create or update a label set used to classify resources.
+      parameters:
+      - $ref: '#/components/parameters/Kbid'
+      - name: labelset
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabelSet'
+      responses:
+        '200':
+          description: Label set stored
+        '403':
+          $ref: '#/components/responses/Forbidden'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+    KnowledgeBox:
+      type: object
+      properties:
+        uuid:
+          type: string
+        slug:
+          type: string
+        title:
+          type: string
+        config:
+          type: object
+    LabelSet:
+      type: object
+      properties:
+        title:
+          type: string
+        color:
+          type: string
+        multiple:
+          type: boolean
+        kind:
+          type: array
+          items:
+            type: string
+        labels:
+          type: array
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+    Counters:
+      type: object
+      properties:
+        resources:
+          type: integer
+        paragraphs:
+          type: integer
+        fields:
+          type: integer
+        sentences:
+          type: integer
+  parameters:
+    Kbid:
+      name: kbid
+      in: path
+      required: true
+      description: Unique identifier of the Knowledge Box.
+      schema:
+        type: string
+  responses:
+    Forbidden:
+      description: The API key does not grant the required role for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-NUCLIA-SERVICEACCOUNT
+      description: 'Knowledge Box service account API key. Pass as `X-NUCLIA-SERVICEACCOUNT: Bearer <token>`. Reader keys allow search/find/ask, Writer keys allow ingestion and resource modification, Manager keys allow administration. Public search endpoints may be called without a key when the Knowledge Box is public.'
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth2 / account bearer token obtained from the Nuclia authentication service, used by the dashboard and management endpoints.
+    nuaKey:
+      type: apiKey
+      in: header
+      name: X-NUCLIA-NUAKEY
+      description: 'Nuclia Understanding API (NUA) key. Pass as `X-NUCLIA-NUAKEY: Bearer <token>` to call the /v1/predict endpoints.'

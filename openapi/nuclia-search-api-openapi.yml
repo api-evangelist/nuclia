@@ -1,0 +1,169 @@
+openapi: 3.0.1
+info:
+  title: Nuclia RAG-as-a-Service Ask Search API
+  description: Specification of the Nuclia (Progress Agentic RAG) cloud API. Nuclia turns unstructured data - documents, files, audio, video, web pages and conversations - into searchable, queryable Knowledge Boxes. This document covers the regional NucliaDB REST API (Knowledge Boxes, resources and ingestion, search, find, ask/chat RAG answers) and the Nuclia Understanding API (NUA / Predict) endpoints. All endpoints are served from a regional zone host.
+  termsOfService: https://nuclia.com/terms-and-conditions/
+  contact:
+    name: Nuclia Support
+    url: https://nuclia.com
+  version: '1.0'
+servers:
+- url: https://{zone}.nuclia.cloud/api
+  description: Regional Nuclia cloud zone host. Replace {zone} with your account region (for example europe-1 or aws-us-east-2-1). Following the Progress rebrand the same surface is also served from https://{region}.rag.progress.cloud/api.
+  variables:
+    zone:
+      default: europe-1
+      description: The Nuclia regional zone for your account.
+security:
+- apiKey: []
+tags:
+- name: Search
+  description: Hybrid search, find (RAG retrieval) and suggest over a Knowledge Box.
+paths:
+  /v1/kb/{kbid}/search:
+    post:
+      operationId: search
+      tags:
+      - Search
+      summary: Search a Knowledge Box
+      description: Run a hybrid search (semantic + keyword + fulltext) across a Knowledge Box and return matching resources, paragraphs and sentences.
+      parameters:
+      - $ref: '#/components/parameters/Kbid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResults'
+  /v1/kb/{kbid}/find:
+    post:
+      operationId: find
+      tags:
+      - Search
+      summary: Find in a Knowledge Box
+      description: Run a find query - the search variant optimized for RAG context retrieval - returning results grouped and scored by resource and paragraph, including optional graph search.
+      parameters:
+      - $ref: '#/components/parameters/Kbid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Find results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FindResults'
+  /v1/kb/{kbid}/suggest:
+    get:
+      operationId: suggest
+      tags:
+      - Search
+      summary: Suggest on a Knowledge Box
+      description: Return autocomplete suggestions and entity matches for a partial query.
+      parameters:
+      - $ref: '#/components/parameters/Kbid'
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Suggestions
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    SearchRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: The natural-language or keyword query.
+        features:
+          type: array
+          description: Search features to enable (keyword, semantic, relations, fulltext).
+          items:
+            type: string
+            enum:
+            - keyword
+            - semantic
+            - relations
+            - fulltext
+        filters:
+          type: array
+          description: Label / metadata filters to constrain results.
+          items:
+            type: string
+        page_number:
+          type: integer
+        page_size:
+          type: integer
+        min_score:
+          type: number
+        rephrase:
+          type: boolean
+    SearchResults:
+      type: object
+      properties:
+        resources:
+          type: object
+        sentences:
+          type: object
+        paragraphs:
+          type: object
+        relations:
+          type: object
+        next_page:
+          type: boolean
+    FindResults:
+      type: object
+      properties:
+        resources:
+          type: object
+          description: Resources keyed by id, each with scored matching paragraphs.
+        relations:
+          type: object
+        total:
+          type: integer
+        next_page:
+          type: boolean
+  parameters:
+    Kbid:
+      name: kbid
+      in: path
+      required: true
+      description: Unique identifier of the Knowledge Box.
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-NUCLIA-SERVICEACCOUNT
+      description: 'Knowledge Box service account API key. Pass as `X-NUCLIA-SERVICEACCOUNT: Bearer <token>`. Reader keys allow search/find/ask, Writer keys allow ingestion and resource modification, Manager keys allow administration. Public search endpoints may be called without a key when the Knowledge Box is public.'
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth2 / account bearer token obtained from the Nuclia authentication service, used by the dashboard and management endpoints.
+    nuaKey:
+      type: apiKey
+      in: header
+      name: X-NUCLIA-NUAKEY
+      description: 'Nuclia Understanding API (NUA) key. Pass as `X-NUCLIA-NUAKEY: Bearer <token>` to call the /v1/predict endpoints.'
