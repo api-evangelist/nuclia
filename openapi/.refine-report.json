@@ -1,0 +1,22 @@
+{
+  "provider": "nuclia",
+  "sources": [
+    "nuclia-ask-api-openapi.yml",
+    "nuclia-knowledge-boxes-api-openapi.yml",
+    "nuclia-predict-api-openapi.yml",
+    "nuclia-resources-api-openapi.yml",
+    "nuclia-search-api-openapi.yml"
+  ],
+  "outputs": [
+    "nuclia-ask-api-openapi.yml",
+    "nuclia-knowledge-boxes-api-openapi.yml",
+    "nuclia-predict-api-openapi.yml",
+    "nuclia-resources-api-openapi.yml",
+    "nuclia-search-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
