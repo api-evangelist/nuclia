@@ -1,0 +1,336 @@
+{
+  "item": [
+    {
+      "id": "e8008ec1-4a8a-4ef7-97ae-138ecbd46ee4",
+      "name": "Ask",
+      "description": {
+        "content": "Generative RAG answers, chat and summarization grounded in a Knowledge Box.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8d6090fe-a5dd-4367-8d0f-a4a65e903537",
+          "name": "Ask a Knowledge Box (RAG generative answer)",
+          "request": {
+            "name": "Ask a Knowledge Box (RAG generative answer)",
+            "description": {
+              "content": "Ask a natural-language question against a Knowledge Box. Nuclia retrieves the most relevant context (semantic, keyword and graph search), builds a prompt and returns a generative answer with the supporting resources as citations. When the request sets `Accept: application/x-ndjson` (or the SDK streaming flag), the answer is streamed back as newline-delimited JSON / Server-Sent events.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "kb",
+                ":kbid",
+                "ask"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "kbid",
+                  "description": "(Required) Unique identifier of the Knowledge Box."
+                },
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Set to true to receive a single buffered JSON answer instead of a stream.",
+                "key": "X-Synchronous",
+                "value": "<boolean>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"context\": [\n    {\n      \"author\": \"<string>\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"author\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"filters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"features\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"generative_model\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"citations\": \"<boolean>\",\n  \"rephrase\": \"<boolean>\",\n  \"max_tokens\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "918797e9-99cc-4d4f-ae63-478eea9b6b24",
+              "name": "Generative answer. Streamed as application/x-ndjson by default, or a single AskResponse object when X-Synchronous is true.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid",
+                    "ask"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Set to true to receive a single buffered JSON answer instead of a stream.",
+                    "key": "X-Synchronous",
+                    "value": "<boolean>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"context\": [\n    {\n      \"author\": \"<string>\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"author\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"filters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"features\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"generative_model\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"citations\": \"<boolean>\",\n  \"rephrase\": \"<boolean>\",\n  \"max_tokens\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"answer\": \"string\",\n  \"relations\": {},\n  \"retrieval_results\": {\n    \"resources\": {},\n    \"relations\": {},\n    \"total\": 9587,\n    \"next_page\": true\n  },\n  \"citations\": {},\n  \"learning_id\": \"string\",\n  \"status\": \"no_context\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d585a24b-f95e-4ac8-9f13-141d96b3696f",
+          "name": "Summarize resources",
+          "request": {
+            "name": "Summarize resources",
+            "description": {
+              "content": "Generate a summary across one or more resources in the Knowledge Box.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "kb",
+                ":kbid",
+                "summarize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "kbid",
+                  "description": "(Required) Unique identifier of the Knowledge Box."
+                },
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resources\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"generative_model\": \"<string>\",\n  \"summary_kind\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c4f83d60-cd00-4ad8-b297-3d498017d8eb",
+              "name": "Summary",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid",
+                    "summarize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resources\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"generative_model\": \"<string>\",\n  \"summary_kind\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The Nuclia regional zone for your account.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "europe-1",
+      "key": "zone"
+    },
+    {
+      "type": "string",
+      "value": "https://{{zone}}.nuclia.cloud/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-NUCLIA-SERVICEACCOUNT"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fe63c34e-859a-4bcd-87c3-ad1789d3c48c",
+    "name": "Nuclia RAG-as-a-Service Ask API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the Nuclia (Progress Agentic RAG) cloud API. Nuclia turns unstructured data - documents, files, audio, video, web pages and conversations - into searchable, queryable Knowledge Boxes. This document covers the regional NucliaDB REST API (Knowledge Boxes, resources and ingestion, search, find, ask/chat RAG answers) and the Nuclia Understanding API (NUA / Predict) endpoints. All endpoints are served from a regional zone host.\n\nContact Support:\n Name: Nuclia Support",
+      "type": "text/plain"
+    }
+  }
+}

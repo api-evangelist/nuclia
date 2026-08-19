@@ -1,0 +1,175 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nuclia RAG-as-a-Service Ask Predict API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-NUCLIA-SERVICEACCOUNT",
+      "value": "{{X-NUCLIA-SERVICEACCOUNT}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Predict",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Predict - generative chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{zone}.nuclia.cloud/api/v1/predict/chat",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-NUCLIA-NUAKEY",
+              "value": "{{X-NUCLIA-NUAKEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Nuclia Understanding API generative endpoint. Send a question with context and receive a generated answer from the configured LLM. Streams tokens back as they are produced. Authenticated with a NUA key."
+        },
+        {
+          "info": {
+            "name": "Predict - summarize",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{zone}.nuclia.cloud/api/v1/predict/summarize",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-NUCLIA-NUAKEY",
+              "value": "{{X-NUCLIA-NUAKEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Summarize supplied text using the Nuclia Understanding API."
+        },
+        {
+          "info": {
+            "name": "Predict - rephrase",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{zone}.nuclia.cloud/api/v1/predict/rephrase",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-NUCLIA-NUAKEY",
+              "value": "{{X-NUCLIA-NUAKEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Rephrase a user question into an optimized search query."
+        },
+        {
+          "info": {
+            "name": "Predict - tokenize / NER",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{zone}.nuclia.cloud/api/v1/predict/tokens",
+            "params": [
+              {
+                "name": "text",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-NUCLIA-NUAKEY",
+              "value": "{{X-NUCLIA-NUAKEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Tokenize input text and return named entities (NER) detected by the Nuclia Understanding API."
+        },
+        {
+          "info": {
+            "name": "Predict - embed sentence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{zone}.nuclia.cloud/api/v1/predict/sentence",
+            "params": [
+              {
+                "name": "text",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-NUCLIA-NUAKEY",
+              "value": "{{X-NUCLIA-NUAKEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Return the embedding vector for a sentence using the configured semantic model."
+        },
+        {
+          "info": {
+            "name": "Predict - rerank",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{zone}.nuclia.cloud/api/v1/predict/rerank",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-NUCLIA-NUAKEY",
+              "value": "{{X-NUCLIA-NUAKEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Rerank a set of retrieved passages against a question for improved relevance."
+        },
+        {
+          "info": {
+            "name": "Predict - list models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{zone}.nuclia.cloud/api/v1/predict/models",
+            "auth": {
+              "type": "apikey",
+              "key": "X-NUCLIA-NUAKEY",
+              "value": "{{X-NUCLIA-NUAKEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List the generative and semantic models available to the account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

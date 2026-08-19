@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nuclia RAG-as-a-Service Ask Knowledge Boxes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-NUCLIA-SERVICEACCOUNT",
+      "value": "{{X-NUCLIA-SERVICEACCOUNT}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Knowledge Boxes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a Knowledge Box",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{zone}.nuclia.cloud/api/v1/kb/:kbid",
+            "params": [
+              {
+                "name": "kbid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Knowledge Box."
+              }
+            ]
+          },
+          "docs": "Retrieve configuration and metadata for a Knowledge Box."
+        },
+        {
+          "info": {
+            "name": "Get Knowledge Box counters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{zone}.nuclia.cloud/api/v1/kb/:kbid/counters",
+            "params": [
+              {
+                "name": "kbid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Knowledge Box."
+              }
+            ]
+          },
+          "docs": "Return resource, paragraph, field and sentence counts for a Knowledge Box."
+        },
+        {
+          "info": {
+            "name": "Get label sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{zone}.nuclia.cloud/api/v1/kb/:kbid/labelsets",
+            "params": [
+              {
+                "name": "kbid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Knowledge Box."
+              }
+            ]
+          },
+          "docs": "Return all label sets configured on the Knowledge Box."
+        },
+        {
+          "info": {
+            "name": "Set a label set",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{zone}.nuclia.cloud/api/v1/kb/:kbid/labelset/:labelset",
+            "params": [
+              {
+                "name": "kbid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Knowledge Box."
+              },
+              {
+                "name": "labelset",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update a label set used to classify resources."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

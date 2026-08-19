@@ -1,0 +1,950 @@
+{
+  "item": [
+    {
+      "id": "ac0d32cc-d552-4549-8ec4-71253bbc0c9d",
+      "name": "Predict",
+      "description": {
+        "content": "Nuclia Understanding API (NUA) - generation, summarize, rephrase, rerank, embeddings and tokenization.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "62e8224d-51f9-4e0e-a69a-13875447a447",
+          "name": "Predict - generative chat",
+          "request": {
+            "name": "Predict - generative chat",
+            "description": {
+              "content": "Nuclia Understanding API generative endpoint. Send a question with context and receive a generated answer from the configured LLM. Streams tokens back as they are produced. Authenticated with a NUA key.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "predict",
+                "chat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-NUCLIA-NUAKEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"<string>\",\n  \"query_context\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"user_id\": \"<string>\",\n  \"generative_model\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6eb4dda0-b58e-4856-b4f0-0b7927fa3eea",
+              "name": "Generated answer (streamed)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "predict",
+                    "chat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-NUAKEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"question\": \"<string>\",\n  \"query_context\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"user_id\": \"<string>\",\n  \"generative_model\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13d15228-eede-49e9-bacd-17f9d64dcc7e",
+          "name": "Predict - summarize",
+          "request": {
+            "name": "Predict - summarize",
+            "description": {
+              "content": "Summarize supplied text using the Nuclia Understanding API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "predict",
+                "summarize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-NUCLIA-NUAKEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resources\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"generative_model\": \"<string>\",\n  \"summary_kind\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8916f5a8-d1a8-48c4-a934-b72cce9dbb55",
+              "name": "Summary",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "predict",
+                    "summarize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-NUAKEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resources\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"generative_model\": \"<string>\",\n  \"summary_kind\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f730006e-9b0d-4719-86fc-1e8d2b4674bf",
+          "name": "Predict - rephrase",
+          "request": {
+            "name": "Predict - rephrase",
+            "description": {
+              "content": "Rephrase a user question into an optimized search query.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "predict",
+                "rephrase"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-NUCLIA-NUAKEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d3ba3b45-b150-4bd7-ae13-c3956d723f86",
+              "name": "Rephrased query",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "predict",
+                    "rephrase"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-NUAKEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"question\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e011574-7082-4ac9-8255-592a86cdfa50",
+          "name": "Predict - tokenize / NER",
+          "request": {
+            "name": "Predict - tokenize / NER",
+            "description": {
+              "content": "Tokenize input text and return named entities (NER) detected by the Nuclia Understanding API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "predict",
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "text",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-NUCLIA-NUAKEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "661e2f16-e83b-4ebb-8eaf-884ab7ef9a28",
+              "name": "Tokens and entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "predict",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "text",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-NUAKEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tokens\": [\n    {\n      \"text\": \"string\",\n      \"ner\": \"string\",\n      \"start\": 9911,\n      \"end\": 7887\n    },\n    {\n      \"text\": \"string\",\n      \"ner\": \"string\",\n      \"start\": 8255,\n      \"end\": 4039\n    }\n  ],\n  \"time\": 8721.483340283934\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "adf5115c-d4bb-4804-8fdf-b4a7163c67eb",
+          "name": "Predict - embed sentence",
+          "request": {
+            "name": "Predict - embed sentence",
+            "description": {
+              "content": "Return the embedding vector for a sentence using the configured semantic model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "predict",
+                "sentence"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "text",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-NUCLIA-NUAKEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "eb51f459-0c0b-4008-8ea3-c7cabf7207c5",
+              "name": "Sentence embedding",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "predict",
+                    "sentence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "text",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-NUAKEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    3520.9090062340542,\n    5432.071691332664\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "beca8cdd-6511-46e0-ac89-a7b5cec811d9",
+          "name": "Predict - rerank",
+          "request": {
+            "name": "Predict - rerank",
+            "description": {
+              "content": "Rerank a set of retrieved passages against a question for improved relevance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "predict",
+                "rerank"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-NUCLIA-NUAKEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3f3670fc-5218-4c1e-9204-51b5adec48f9",
+              "name": "Reranked results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "predict",
+                    "rerank"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-NUAKEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55278e1f-61a8-4ac0-bf8b-971318104c49",
+          "name": "Predict - list models",
+          "request": {
+            "name": "Predict - list models",
+            "description": {
+              "content": "List the generative and semantic models available to the account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "predict",
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-NUCLIA-NUAKEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d48f6e7c-3575-4164-8ef5-9a9537f13477",
+              "name": "Available models",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "predict",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-NUAKEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The Nuclia regional zone for your account.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "europe-1",
+      "key": "zone"
+    },
+    {
+      "type": "string",
+      "value": "https://{{zone}}.nuclia.cloud/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-NUCLIA-SERVICEACCOUNT"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ffeb24cd-7560-4312-9d8d-b2545b1e4fc6",
+    "name": "Nuclia RAG-as-a-Service Ask Predict API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the Nuclia (Progress Agentic RAG) cloud API. Nuclia turns unstructured data - documents, files, audio, video, web pages and conversations - into searchable, queryable Knowledge Boxes. This document covers the regional NucliaDB REST API (Knowledge Boxes, resources and ingestion, search, find, ask/chat RAG answers) and the Nuclia Understanding API (NUA / Predict) endpoints. All endpoints are served from a regional zone host.\n\nContact Support:\n Name: Nuclia Support",
+      "type": "text/plain"
+    }
+  }
+}

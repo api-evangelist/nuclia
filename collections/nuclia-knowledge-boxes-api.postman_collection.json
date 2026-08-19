@@ -1,0 +1,672 @@
+{
+  "item": [
+    {
+      "id": "66ac5f57-5ca4-4157-beca-bd6845bd74a3",
+      "name": "Knowledge Boxes",
+      "description": {
+        "content": "Create, configure and inspect Knowledge Boxes and their label sets.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7b9bf3f5-bde9-4b73-8052-2bd706010c25",
+          "name": "Get a Knowledge Box",
+          "request": {
+            "name": "Get a Knowledge Box",
+            "description": {
+              "content": "Retrieve configuration and metadata for a Knowledge Box.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "kb",
+                ":kbid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "kbid",
+                  "description": "(Required) Unique identifier of the Knowledge Box."
+                },
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ffbc06e5-5d8d-4079-82b1-ca4293275bda",
+              "name": "Knowledge Box configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"string\",\n  \"slug\": \"string\",\n  \"title\": \"string\",\n  \"config\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f1283d5-1ac4-425c-821e-dbb106a8291e",
+              "name": "The API key does not grant the required role for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75cf4b69-c831-485f-924f-64086ac0f90f",
+          "name": "Get Knowledge Box counters",
+          "request": {
+            "name": "Get Knowledge Box counters",
+            "description": {
+              "content": "Return resource, paragraph, field and sentence counts for a Knowledge Box.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "kb",
+                ":kbid",
+                "counters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "kbid",
+                  "description": "(Required) Unique identifier of the Knowledge Box."
+                },
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0c256952-ce48-4772-bc3a-63bb60ab2c36",
+              "name": "Knowledge Box counters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid",
+                    "counters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resources\": 4216,\n  \"paragraphs\": 4129,\n  \"fields\": 6969,\n  \"sentences\": 227\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5bdc9218-ee67-4761-93ae-a7a81c846ee4",
+          "name": "Get label sets",
+          "request": {
+            "name": "Get label sets",
+            "description": {
+              "content": "Return all label sets configured on the Knowledge Box.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "kb",
+                ":kbid",
+                "labelsets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "kbid",
+                  "description": "(Required) Unique identifier of the Knowledge Box."
+                },
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c994ded1-24fa-42da-ab19-7feb402e52ea",
+              "name": "Label sets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid",
+                    "labelsets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "884bb33a-8269-4145-b55d-f273296e98a2",
+          "name": "Set a label set",
+          "request": {
+            "name": "Set a label set",
+            "description": {
+              "content": "Create or update a label set used to classify resources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "kb",
+                ":kbid",
+                "labelset",
+                ":labelset"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "kbid",
+                  "description": "(Required) Unique identifier of the Knowledge Box."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "labelset",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"color\": \"<string>\",\n  \"multiple\": \"<boolean>\",\n  \"kind\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"labels\": [\n    {\n      \"title\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "213bdcf5-ff34-4712-b72b-1b54b6daf992",
+              "name": "Label set stored",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid",
+                    "labelset",
+                    ":labelset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "labelset",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"color\": \"<string>\",\n  \"multiple\": \"<boolean>\",\n  \"kind\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"labels\": [\n    {\n      \"title\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1afe2e1b-dfa7-4ee9-b594-f04dde1f19b5",
+              "name": "The API key does not grant the required role for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid",
+                    "labelset",
+                    ":labelset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "labelset",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"color\": \"<string>\",\n  \"multiple\": \"<boolean>\",\n  \"kind\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"labels\": [\n    {\n      \"title\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The Nuclia regional zone for your account.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "europe-1",
+      "key": "zone"
+    },
+    {
+      "type": "string",
+      "value": "https://{{zone}}.nuclia.cloud/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-NUCLIA-SERVICEACCOUNT"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8f2f0c38-1276-4075-9654-6a43ddb19a56",
+    "name": "Nuclia RAG-as-a-Service Ask Knowledge Boxes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the Nuclia (Progress Agentic RAG) cloud API. Nuclia turns unstructured data - documents, files, audio, video, web pages and conversations - into searchable, queryable Knowledge Boxes. This document covers the regional NucliaDB REST API (Knowledge Boxes, resources and ingestion, search, find, ask/chat RAG answers) and the Nuclia Understanding API (NUA / Predict) endpoints. All endpoints are served from a regional zone host.\n\nContact Support:\n Name: Nuclia Support",
+      "type": "text/plain"
+    }
+  }
+}

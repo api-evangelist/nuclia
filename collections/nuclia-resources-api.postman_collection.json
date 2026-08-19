@@ -1,0 +1,1412 @@
+{
+  "item": [
+    {
+      "id": "b46d75f6-3995-435f-aacb-33a674629b40",
+      "name": "Resources",
+      "description": {
+        "content": "Ingest and manage resources - files, text, links and conversations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c87e1f54-3435-492b-bace-6306f6ec2f86",
+          "name": "Create a resource",
+          "request": {
+            "name": "Create a resource",
+            "description": {
+              "content": "Create a new resource in a Knowledge Box. Text, link, file and conversation fields may be supplied inline; uploaded binaries are processed asynchronously and indexed for search.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "kb",
+                ":kbid",
+                "resource"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "kbid",
+                  "description": "(Required) Unique identifier of the Knowledge Box."
+                },
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"slug\": \"<string>\",\n  \"title\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"usermetadata\": {\n    \"classifications\": [\n      {\n        \"labelset\": \"<string>\",\n        \"label\": \"<string>\"\n      },\n      {\n        \"labelset\": \"<string>\",\n        \"label\": \"<string>\"\n      }\n    ]\n  },\n  \"texts\": {\n    \"key_0\": {\n      \"body\": \"<string>\",\n      \"format\": \"<string>\"\n    },\n    \"key_1\": {\n      \"body\": \"<string>\",\n      \"format\": \"<string>\"\n    }\n  },\n  \"links\": {\n    \"key_0\": {\n      \"uri\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d7f23155-0f52-47c6-8749-b8acc08b83ec",
+              "name": "Resource created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid",
+                    "resource"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"slug\": \"<string>\",\n  \"title\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"usermetadata\": {\n    \"classifications\": [\n      {\n        \"labelset\": \"<string>\",\n        \"label\": \"<string>\"\n      },\n      {\n        \"labelset\": \"<string>\",\n        \"label\": \"<string>\"\n      }\n    ]\n  },\n  \"texts\": {\n    \"key_0\": {\n      \"body\": \"<string>\",\n      \"format\": \"<string>\"\n    },\n    \"key_1\": {\n      \"body\": \"<string>\",\n      \"format\": \"<string>\"\n    }\n  },\n  \"links\": {\n    \"key_0\": {\n      \"uri\": \"<string>\"\n    },\n    \"key_1\": {\n      \"uri\": \"<string>\"\n    },\n    \"key_2\": {\n      \"uri\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"string\",\n  \"seqid\": 1645\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c206886-9c53-40b8-b840-07412338ee83",
+              "name": "The API key does not grant the required role for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid",
+                    "resource"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"slug\": \"<string>\",\n  \"title\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"usermetadata\": {\n    \"classifications\": [\n      {\n        \"labelset\": \"<string>\",\n        \"label\": \"<string>\"\n      },\n      {\n        \"labelset\": \"<string>\",\n        \"label\": \"<string>\"\n      }\n    ]\n  },\n  \"texts\": {\n    \"key_0\": {\n      \"body\": \"<string>\",\n      \"format\": \"<string>\"\n    },\n    \"key_1\": {\n      \"body\": \"<string>\",\n      \"format\": \"<string>\"\n    }\n  },\n  \"links\": {\n    \"key_0\": {\n      \"uri\": \"<string>\"\n    },\n    \"key_1\": {\n      \"uri\": \"<string>\"\n    },\n    \"key_2\": {\n      \"uri\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a164f56-ce0c-4ff9-808c-5591675f839f",
+          "name": "List resources",
+          "request": {
+            "name": "List resources",
+            "description": {
+              "content": "List resources in a Knowledge Box with pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "kb",
+                ":kbid",
+                "resources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "20"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "kbid",
+                  "description": "(Required) Unique identifier of the Knowledge Box."
+                },
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7a5c6473-652b-41d9-bc5f-fb4bb90a8c9e",
+              "name": "Paginated resource list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid",
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resources\": [\n    {\n      \"id\": \"string\",\n      \"slug\": \"string\",\n      \"title\": \"string\",\n      \"summary\": \"string\",\n      \"created\": \"1948-06-12T11:24:51.125Z\",\n      \"data\": {},\n      \"extracted\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"slug\": \"string\",\n      \"title\": \"string\",\n      \"summary\": \"string\",\n      \"created\": \"2005-10-25T23:37:47.001Z\",\n      \"data\": {},\n      \"extracted\": {}\n    }\n  ],\n  \"pagination\": {\n    \"page\": 4363,\n    \"size\": 5901,\n    \"total\": 531\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b17e9e3d-4b43-436e-9bc6-06a11f595feb",
+          "name": "Get a resource",
+          "request": {
+            "name": "Get a resource",
+            "description": {
+              "content": "Retrieve a resource by its id, optionally including extracted data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "kb",
+                ":kbid",
+                "resource",
+                ":rid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "show",
+                  "value": "<string>",
+                  "description": "Parts of the resource to return (basic, values, extracted, errors)."
+                },
+                {
+                  "disabled": false,
+                  "key": "show",
+                  "value": "<string>",
+                  "description": "Parts of the resource to return (basic, values, extracted, errors)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "kbid",
+                  "description": "(Required) Unique identifier of the Knowledge Box."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rid",
+                  "description": "(Required) Unique identifier of the resource."
+                },
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eabe772f-9494-4097-9410-30e3e39d66c2",
+              "name": "Resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid",
+                    "resource",
+                    ":rid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "show",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rid",
+                      "description": "(Required) Unique identifier of the resource."
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"slug\": \"string\",\n  \"title\": \"string\",\n  \"summary\": \"string\",\n  \"created\": \"2018-06-17T23:39:31.544Z\",\n  \"data\": {},\n  \"extracted\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63694805-9f86-43c4-b540-8519572c1a56",
+              "name": "The requested object was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid",
+                    "resource",
+                    ":rid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "show",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rid",
+                      "description": "(Required) Unique identifier of the resource."
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "48624540-c6fa-4b34-b3c5-08a7a4ec5e41",
+          "name": "Modify a resource",
+          "request": {
+            "name": "Modify a resource",
+            "description": {
+              "content": "Update fields, metadata or labels of an existing resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "kb",
+                ":kbid",
+                "resource",
+                ":rid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "kbid",
+                  "description": "(Required) Unique identifier of the Knowledge Box."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rid",
+                  "description": "(Required) Unique identifier of the resource."
+                },
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"slug\": \"<string>\",\n  \"title\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"usermetadata\": {\n    \"classifications\": [\n      {\n        \"labelset\": \"<string>\",\n        \"label\": \"<string>\"\n      },\n      {\n        \"labelset\": \"<string>\",\n        \"label\": \"<string>\"\n      }\n    ]\n  },\n  \"texts\": {\n    \"key_0\": {\n      \"body\": \"<string>\",\n      \"format\": \"<string>\"\n    }\n  },\n  \"links\": {\n    \"key_0\": {\n      \"uri\": \"<string>\"\n    },\n    \"key_1\": {\n      \"uri\": \"<string>\"\n    },\n    \"key_2\": {\n      \"uri\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "211e5ddd-4574-4e62-9ee7-9567e98424c7",
+              "name": "Resource modified",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid",
+                    "resource",
+                    ":rid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rid",
+                      "description": "(Required) Unique identifier of the resource."
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"slug\": \"<string>\",\n  \"title\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"usermetadata\": {\n    \"classifications\": [\n      {\n        \"labelset\": \"<string>\",\n        \"label\": \"<string>\"\n      },\n      {\n        \"labelset\": \"<string>\",\n        \"label\": \"<string>\"\n      }\n    ]\n  },\n  \"texts\": {\n    \"key_0\": {\n      \"body\": \"<string>\",\n      \"format\": \"<string>\"\n    },\n    \"key_1\": {\n      \"body\": \"<string>\",\n      \"format\": \"<string>\"\n    }\n  },\n  \"links\": {\n    \"key_0\": {\n      \"uri\": \"<string>\"\n    },\n    \"key_1\": {\n      \"uri\": \"<string>\"\n    },\n    \"key_2\": {\n      \"uri\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a5f47aed-5bf7-49f6-b620-4a636f6df5e5",
+              "name": "The API key does not grant the required role for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid",
+                    "resource",
+                    ":rid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rid",
+                      "description": "(Required) Unique identifier of the resource."
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"slug\": \"<string>\",\n  \"title\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"usermetadata\": {\n    \"classifications\": [\n      {\n        \"labelset\": \"<string>\",\n        \"label\": \"<string>\"\n      },\n      {\n        \"labelset\": \"<string>\",\n        \"label\": \"<string>\"\n      }\n    ]\n  },\n  \"texts\": {\n    \"key_0\": {\n      \"body\": \"<string>\",\n      \"format\": \"<string>\"\n    },\n    \"key_1\": {\n      \"body\": \"<string>\",\n      \"format\": \"<string>\"\n    }\n  },\n  \"links\": {\n    \"key_0\": {\n      \"uri\": \"<string>\"\n    },\n    \"key_1\": {\n      \"uri\": \"<string>\"\n    },\n    \"key_2\": {\n      \"uri\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1048060-371b-4c40-b738-0c298fa4a19f",
+          "name": "Delete a resource",
+          "request": {
+            "name": "Delete a resource",
+            "description": {
+              "content": "Delete a resource and its indexed data from the Knowledge Box.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "kb",
+                ":kbid",
+                "resource",
+                ":rid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "kbid",
+                  "description": "(Required) Unique identifier of the Knowledge Box."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rid",
+                  "description": "(Required) Unique identifier of the resource."
+                },
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6782ca4d-c8cb-4bdd-b666-688e6f431d6a",
+              "name": "Resource deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid",
+                    "resource",
+                    ":rid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rid",
+                      "description": "(Required) Unique identifier of the resource."
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "06785ed7-22b9-48c8-b34e-21e46aec6b5a",
+              "name": "The API key does not grant the required role for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid",
+                    "resource",
+                    ":rid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rid",
+                      "description": "(Required) Unique identifier of the resource."
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "afbd35da-a299-4e93-bdd1-24e788ebfbdd",
+          "name": "Upload a file field",
+          "request": {
+            "name": "Upload a file field",
+            "description": {
+              "content": "Upload a binary file into a file field of a resource. The file is sent through Nuclia's processing pipeline (extraction, embedding, indexing). Large files should use the TUS resumable upload endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "kb",
+                ":kbid",
+                "resource",
+                ":rid",
+                "file",
+                ":field"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "kbid",
+                  "description": "(Required) Unique identifier of the Knowledge Box."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rid",
+                  "description": "(Required) Unique identifier of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "field",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "X-Filename",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/octet-stream"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "file"
+            }
+          },
+          "response": [
+            {
+              "id": "c566b0e0-5094-47e7-998e-e674f39537eb",
+              "name": "File field stored and queued for processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid",
+                    "resource",
+                    ":rid",
+                    "file",
+                    ":field"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rid",
+                      "description": "(Required) Unique identifier of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "field",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Filename",
+                    "value": "<string>",
+                    "description": ""
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "file"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8695a01f-b799-4375-9cf3-16497415d2f4",
+              "name": "The API key does not grant the required role for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid",
+                    "resource",
+                    ":rid",
+                    "file",
+                    ":field"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rid",
+                      "description": "(Required) Unique identifier of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "field",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Filename",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "file"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ded0f3e-d466-4b19-a7ad-71eea733a5bd",
+          "name": "Upload a binary directly to a Knowledge Box",
+          "request": {
+            "name": "Upload a binary directly to a Knowledge Box",
+            "description": {
+              "content": "Upload a binary file directly to a Knowledge Box. Nuclia creates a resource automatically and runs the file through the processing pipeline for extraction, embedding and indexing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "kb",
+                ":kbid",
+                "upload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "kbid",
+                  "description": "(Required) Unique identifier of the Knowledge Box."
+                },
+                {
+                  "description": "The Nuclia regional zone for your account.",
+                  "type": "any",
+                  "value": "{{zone}}",
+                  "key": "zone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "X-Filename",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/octet-stream"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "file"
+            }
+          },
+          "response": [
+            {
+              "id": "9846cb00-90f5-415c-8540-e7d2158e9337",
+              "name": "Resource created from upload",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "kb",
+                    ":kbid",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kbid",
+                      "description": "(Required) Unique identifier of the Knowledge Box."
+                    },
+                    {
+                      "description": "The Nuclia regional zone for your account.",
+                      "type": "any",
+                      "value": "{{zone}}",
+                      "key": "zone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-NUCLIA-SERVICEACCOUNT",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Filename",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "file"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"string\",\n  \"seqid\": 1645\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The Nuclia regional zone for your account.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "europe-1",
+      "key": "zone"
+    },
+    {
+      "type": "string",
+      "value": "https://{{zone}}.nuclia.cloud/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-NUCLIA-SERVICEACCOUNT"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fc3ee417-d66a-416a-9cbd-0c272d97dabd",
+    "name": "Nuclia RAG-as-a-Service Ask Resources API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the Nuclia (Progress Agentic RAG) cloud API. Nuclia turns unstructured data - documents, files, audio, video, web pages and conversations - into searchable, queryable Knowledge Boxes. This document covers the regional NucliaDB REST API (Knowledge Boxes, resources and ingestion, search, find, ask/chat RAG answers) and the Nuclia Understanding API (NUA / Predict) endpoints. All endpoints are served from a regional zone host.\n\nContact Support:\n Name: Nuclia Support",
+      "type": "text/plain"
+    }
+  }
+}

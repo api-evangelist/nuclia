@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nuclia RAG-as-a-Service Ask Search API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-NUCLIA-SERVICEACCOUNT",
+      "value": "{{X-NUCLIA-SERVICEACCOUNT}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search a Knowledge Box",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{zone}.nuclia.cloud/api/v1/kb/:kbid/search",
+            "params": [
+              {
+                "name": "kbid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Knowledge Box."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run a hybrid search (semantic + keyword + fulltext) across a Knowledge Box and return matching resources, paragraphs and sentences."
+        },
+        {
+          "info": {
+            "name": "Find in a Knowledge Box",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{zone}.nuclia.cloud/api/v1/kb/:kbid/find",
+            "params": [
+              {
+                "name": "kbid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Knowledge Box."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run a find query - the search variant optimized for RAG context retrieval - returning results grouped and scored by resource and paragraph, including optional graph search."
+        },
+        {
+          "info": {
+            "name": "Suggest on a Knowledge Box",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{zone}.nuclia.cloud/api/v1/kb/:kbid/suggest",
+            "params": [
+              {
+                "name": "kbid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Knowledge Box."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Return autocomplete suggestions and entity matches for a partial query."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

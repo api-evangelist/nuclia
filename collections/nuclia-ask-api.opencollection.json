@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nuclia RAG-as-a-Service Ask API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-NUCLIA-SERVICEACCOUNT",
+      "value": "{{X-NUCLIA-SERVICEACCOUNT}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ask",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ask a Knowledge Box (RAG generative answer)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{zone}.nuclia.cloud/api/v1/kb/:kbid/ask",
+            "headers": [
+              {
+                "name": "X-Synchronous",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "kbid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Knowledge Box."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Ask a natural-language question against a Knowledge Box. Nuclia retrieves the most relevant context (semantic, keyword and graph search), builds a prompt and returns a generative answer with the supporting resources as citations. When the request sets `Accept: application/x-ndjson` (or the SDK streaming flag), the answer is streamed back as newline-delimited JSON / Server-Sent events."
+        },
+        {
+          "info": {
+            "name": "Summarize resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{zone}.nuclia.cloud/api/v1/kb/:kbid/summarize",
+            "params": [
+              {
+                "name": "kbid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Knowledge Box."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a summary across one or more resources in the Knowledge Box."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

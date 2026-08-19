@@ -1,0 +1,224 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nuclia RAG-as-a-Service Ask Resources API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-NUCLIA-SERVICEACCOUNT",
+      "value": "{{X-NUCLIA-SERVICEACCOUNT}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Resources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{zone}.nuclia.cloud/api/v1/kb/:kbid/resource",
+            "params": [
+              {
+                "name": "kbid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Knowledge Box."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new resource in a Knowledge Box. Text, link, file and conversation fields may be supplied inline; uploaded binaries are processed asynchronously and indexed for search."
+        },
+        {
+          "info": {
+            "name": "List resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{zone}.nuclia.cloud/api/v1/kb/:kbid/resources",
+            "params": [
+              {
+                "name": "kbid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Knowledge Box."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List resources in a Knowledge Box with pagination."
+        },
+        {
+          "info": {
+            "name": "Get a resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{zone}.nuclia.cloud/api/v1/kb/:kbid/resource/:rid",
+            "params": [
+              {
+                "name": "kbid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Knowledge Box."
+              },
+              {
+                "name": "rid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the resource."
+              },
+              {
+                "name": "show",
+                "value": "",
+                "type": "query",
+                "description": "Parts of the resource to return (basic, values, extracted, errors)."
+              }
+            ]
+          },
+          "docs": "Retrieve a resource by its id, optionally including extracted data."
+        },
+        {
+          "info": {
+            "name": "Modify a resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{zone}.nuclia.cloud/api/v1/kb/:kbid/resource/:rid",
+            "params": [
+              {
+                "name": "kbid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Knowledge Box."
+              },
+              {
+                "name": "rid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update fields, metadata or labels of an existing resource."
+        },
+        {
+          "info": {
+            "name": "Delete a resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{zone}.nuclia.cloud/api/v1/kb/:kbid/resource/:rid",
+            "params": [
+              {
+                "name": "kbid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Knowledge Box."
+              },
+              {
+                "name": "rid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Delete a resource and its indexed data from the Knowledge Box."
+        },
+        {
+          "info": {
+            "name": "Upload a file field",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{zone}.nuclia.cloud/api/v1/kb/:kbid/resource/:rid/file/:field",
+            "headers": [
+              {
+                "name": "X-Filename",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "kbid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Knowledge Box."
+              },
+              {
+                "name": "rid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the resource."
+              },
+              {
+                "name": "field",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Upload a binary file into a file field of a resource. The file is sent through Nuclia's processing pipeline (extraction, embedding, indexing). Large files should use the TUS resumable upload endpoint."
+        },
+        {
+          "info": {
+            "name": "Upload a binary directly to a Knowledge Box",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{zone}.nuclia.cloud/api/v1/kb/:kbid/upload",
+            "headers": [
+              {
+                "name": "X-Filename",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "kbid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Knowledge Box."
+              }
+            ]
+          },
+          "docs": "Upload a binary file directly to a Knowledge Box. Nuclia creates a resource automatically and runs the file through the processing pipeline for extraction, embedding and indexing."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
