@@ -7,6 +7,18 @@ description: Nuclia is a RAG-as-a-Service / AI search platform (now part of Prog
   video, web pages and conversations - into Knowledge Boxes, automatically extracting,
   embedding and indexing it so applications can run hybrid (semantic, keyword, graph)
   search and get grounded generative answers through a regional REST API.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
