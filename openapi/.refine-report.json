@@ -1,11 +1,7 @@
 {
   "provider": "nuclia",
   "sources": [
-    "nuclia-ask-api-openapi.yml",
-    "nuclia-knowledge-boxes-api-openapi.yml",
-    "nuclia-predict-api-openapi.yml",
-    "nuclia-resources-api-openapi.yml",
-    "nuclia-search-api-openapi.yml"
+    "_original/nuclia-openapi.yml"
   ],
   "outputs": [
     "nuclia-ask-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "nuclia-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "nuclia-ask-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nuclia-knowledge-boxes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nuclia-predict-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nuclia-resources-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nuclia-search-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

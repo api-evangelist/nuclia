@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Nuclia RAG-as-a-Service Ask Knowledge Boxes API
+  title: Nuclia RAG-as-a-Service Knowledge Boxes API
   description: Specification of the Nuclia (Progress Agentic RAG) cloud API. Nuclia turns unstructured data - documents, files, audio, video, web pages and conversations - into searchable, queryable Knowledge Boxes. This document covers the regional NucliaDB REST API (Knowledge Boxes, resources and ingestion, search, find, ask/chat RAG answers) and the Nuclia Understanding API (NUA / Predict) endpoints. All endpoints are served from a regional zone host.
   termsOfService: https://nuclia.com/terms-and-conditions/
   contact:
@@ -96,23 +96,38 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
 components:
+  responses:
+    Forbidden:
+      description: The API key does not grant the required role for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Kbid:
+      name: kbid
+      in: path
+      required: true
+      description: Unique identifier of the Knowledge Box.
+      schema:
+        type: string
   schemas:
     Error:
       type: object
       properties:
         detail:
           type: string
-    KnowledgeBox:
+    Counters:
       type: object
       properties:
-        uuid:
-          type: string
-        slug:
-          type: string
-        title:
-          type: string
-        config:
-          type: object
+        resources:
+          type: integer
+        paragraphs:
+          type: integer
+        fields:
+          type: integer
+        sentences:
+          type: integer
     LabelSet:
       type: object
       properties:
@@ -133,32 +148,17 @@ components:
             properties:
               title:
                 type: string
-    Counters:
+    KnowledgeBox:
       type: object
       properties:
-        resources:
-          type: integer
-        paragraphs:
-          type: integer
-        fields:
-          type: integer
-        sentences:
-          type: integer
-  parameters:
-    Kbid:
-      name: kbid
-      in: path
-      required: true
-      description: Unique identifier of the Knowledge Box.
-      schema:
-        type: string
-  responses:
-    Forbidden:
-      description: The API key does not grant the required role for this operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        uuid:
+          type: string
+        slug:
+          type: string
+        title:
+          type: string
+        config:
+          type: object
   securitySchemes:
     apiKey:
       type: apiKey

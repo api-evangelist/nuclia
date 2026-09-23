@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Nuclia RAG-as-a-Service Ask Resources API
+  title: Nuclia RAG-as-a-Service Resources API
   description: Specification of the Nuclia (Progress Agentic RAG) cloud API. Nuclia turns unstructured data - documents, files, audio, video, web pages and conversations - into searchable, queryable Knowledge Boxes. This document covers the regional NucliaDB REST API (Knowledge Boxes, resources and ingestion, search, find, ask/chat RAG answers) and the Nuclia Understanding API (NUA / Predict) endpoints. All endpoints are served from a regional zone host.
   termsOfService: https://nuclia.com/terms-and-conditions/
   contact:
@@ -190,6 +190,29 @@ paths:
                 $ref: '#/components/schemas/ResourceCreated'
 components:
   schemas:
+    ResourceCreated:
+      type: object
+      properties:
+        uuid:
+          type: string
+        seqid:
+          type: integer
+    ResourceList:
+      type: object
+      properties:
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+        pagination:
+          type: object
+          properties:
+            page:
+              type: integer
+            size:
+              type: integer
+            total:
+              type: integer
     Resource:
       type: object
       properties:
@@ -208,34 +231,6 @@ components:
           type: object
         extracted:
           type: object
-    ResourceCreated:
-      type: object
-      properties:
-        uuid:
-          type: string
-        seqid:
-          type: integer
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-    ResourceList:
-      type: object
-      properties:
-        resources:
-          type: array
-          items:
-            $ref: '#/components/schemas/Resource'
-        pagination:
-          type: object
-          properties:
-            page:
-              type: integer
-            size:
-              type: integer
-            total:
-              type: integer
     CreateResourcePayload:
       type: object
       properties:
@@ -280,14 +275,25 @@ components:
             properties:
               uri:
                 type: string
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+  responses:
+    Forbidden:
+      description: The API key does not grant the required role for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested object was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    Rid:
-      name: rid
-      in: path
-      required: true
-      description: Unique identifier of the resource.
-      schema:
-        type: string
     Kbid:
       name: kbid
       in: path
@@ -295,19 +301,13 @@ components:
       description: Unique identifier of the Knowledge Box.
       schema:
         type: string
-  responses:
-    NotFound:
-      description: The requested object was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: The API key does not grant the required role for this operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Rid:
+      name: rid
+      in: path
+      required: true
+      description: Unique identifier of the resource.
+      schema:
+        type: string
   securitySchemes:
     apiKey:
       type: apiKey

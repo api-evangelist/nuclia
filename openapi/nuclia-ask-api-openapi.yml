@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Nuclia RAG-as-a-Service Ask API
   description: Specification of the Nuclia (Progress Agentic RAG) cloud API. Nuclia turns unstructured data - documents, files, audio, video, web pages and conversations - into searchable, queryable Knowledge Boxes. This document covers the regional NucliaDB REST API (Knowledge Boxes, resources and ingestion, search, find, ask/chat RAG answers) and the Nuclia Understanding API (NUA / Predict) endpoints. All endpoints are served from a regional zone host.
@@ -77,41 +77,6 @@ paths:
                     type: string
 components:
   schemas:
-    AskResponse:
-      type: object
-      properties:
-        answer:
-          type: string
-          description: The generated answer text. Streamed incrementally when not synchronous.
-        relations:
-          type: object
-        retrieval_results:
-          $ref: '#/components/schemas/FindResults'
-        citations:
-          type: object
-          description: Mapping of cited resources / paragraphs supporting the answer.
-        learning_id:
-          type: string
-        status:
-          type: string
-          enum:
-          - success
-          - error
-          - no_context
-    SummarizeRequest:
-      type: object
-      properties:
-        resources:
-          type: array
-          items:
-            type: string
-        generative_model:
-          type: string
-        summary_kind:
-          type: string
-          enum:
-          - simple
-          - extended
     FindResults:
       type: object
       properties:
@@ -169,6 +134,41 @@ components:
           type: boolean
         max_tokens:
           type: integer
+    AskResponse:
+      type: object
+      properties:
+        answer:
+          type: string
+          description: The generated answer text. Streamed incrementally when not synchronous.
+        relations:
+          type: object
+        retrieval_results:
+          $ref: '#/components/schemas/FindResults'
+        citations:
+          type: object
+          description: Mapping of cited resources / paragraphs supporting the answer.
+        learning_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - error
+          - no_context
+    SummarizeRequest:
+      type: object
+      properties:
+        resources:
+          type: array
+          items:
+            type: string
+        generative_model:
+          type: string
+        summary_kind:
+          type: string
+          enum:
+          - simple
+          - extended
   parameters:
     Kbid:
       name: kbid

@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Nuclia RAG-as-a-Service Ask Search API
+  title: Nuclia RAG-as-a-Service Search API
   description: Specification of the Nuclia (Progress Agentic RAG) cloud API. Nuclia turns unstructured data - documents, files, audio, video, web pages and conversations - into searchable, queryable Knowledge Boxes. This document covers the regional NucliaDB REST API (Knowledge Boxes, resources and ingestion, search, find, ask/chat RAG answers) and the Nuclia Understanding API (NUA / Predict) endpoints. All endpoints are served from a regional zone host.
   termsOfService: https://nuclia.com/terms-and-conditions/
   contact:
@@ -86,7 +86,28 @@ paths:
               schema:
                 type: object
 components:
+  parameters:
+    Kbid:
+      name: kbid
+      in: path
+      required: true
+      description: Unique identifier of the Knowledge Box.
+      schema:
+        type: string
   schemas:
+    SearchResults:
+      type: object
+      properties:
+        resources:
+          type: object
+        sentences:
+          type: object
+        paragraphs:
+          type: object
+        relations:
+          type: object
+        next_page:
+          type: boolean
     SearchRequest:
       type: object
       required:
@@ -118,19 +139,6 @@ components:
           type: number
         rephrase:
           type: boolean
-    SearchResults:
-      type: object
-      properties:
-        resources:
-          type: object
-        sentences:
-          type: object
-        paragraphs:
-          type: object
-        relations:
-          type: object
-        next_page:
-          type: boolean
     FindResults:
       type: object
       properties:
@@ -143,14 +151,6 @@ components:
           type: integer
         next_page:
           type: boolean
-  parameters:
-    Kbid:
-      name: kbid
-      in: path
-      required: true
-      description: Unique identifier of the Knowledge Box.
-      schema:
-        type: string
   securitySchemes:
     apiKey:
       type: apiKey

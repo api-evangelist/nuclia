@@ -1,0 +1,36 @@
+# Front Door AI Index — nuclia — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: nuclia
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: nuclia.com
+  final_host: www.progress.com
+  ownership: own
+  owner: nuclia
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 180
+  host_score: 180
+  density: 76.96
+  words: 2339
+  tiers:
+    agentic: 123
+    core: 51
+    model: 6
+  ambiguous: 15
+  top_terms:
+    RAG: 59
+    agentic: 51
+    AI: 39
+    agent: 12
+    LLMs: 9
+    MCP: 3
+    AI assistant: 2
+    OpenAI: 2
+    chatbot: 2
+    copilot: 2
+    intelligence: 2
+    AI agent: 1
