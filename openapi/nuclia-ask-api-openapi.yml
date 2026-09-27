@@ -134,6 +134,20 @@ components:
           type: boolean
         max_tokens:
           type: integer
+    SummarizeRequest:
+      type: object
+      properties:
+        resources:
+          type: array
+          items:
+            type: string
+        generative_model:
+          type: string
+        summary_kind:
+          type: string
+          enum:
+          - simple
+          - extended
     AskResponse:
       type: object
       properties:
@@ -155,20 +169,6 @@ components:
           - success
           - error
           - no_context
-    SummarizeRequest:
-      type: object
-      properties:
-        resources:
-          type: array
-          items:
-            type: string
-        generative_model:
-          type: string
-        summary_kind:
-          type: string
-          enum:
-          - simple
-          - extended
   parameters:
     Kbid:
       name: kbid

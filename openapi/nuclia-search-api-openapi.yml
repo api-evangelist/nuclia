@@ -86,28 +86,7 @@ paths:
               schema:
                 type: object
 components:
-  parameters:
-    Kbid:
-      name: kbid
-      in: path
-      required: true
-      description: Unique identifier of the Knowledge Box.
-      schema:
-        type: string
   schemas:
-    SearchResults:
-      type: object
-      properties:
-        resources:
-          type: object
-        sentences:
-          type: object
-        paragraphs:
-          type: object
-        relations:
-          type: object
-        next_page:
-          type: boolean
     SearchRequest:
       type: object
       required:
@@ -151,6 +130,27 @@ components:
           type: integer
         next_page:
           type: boolean
+    SearchResults:
+      type: object
+      properties:
+        resources:
+          type: object
+        sentences:
+          type: object
+        paragraphs:
+          type: object
+        relations:
+          type: object
+        next_page:
+          type: boolean
+  parameters:
+    Kbid:
+      name: kbid
+      in: path
+      required: true
+      description: Unique identifier of the Knowledge Box.
+      schema:
+        type: string
   securitySchemes:
     apiKey:
       type: apiKey

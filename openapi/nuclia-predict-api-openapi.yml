@@ -178,6 +178,24 @@ paths:
                 type: object
 components:
   schemas:
+    TokensResponse:
+      type: object
+      properties:
+        tokens:
+          type: array
+          items:
+            type: object
+            properties:
+              text:
+                type: string
+              ner:
+                type: string
+              start:
+                type: integer
+              end:
+                type: integer
+        time:
+          type: number
     PredictChatRequest:
       type: object
       required:
@@ -207,24 +225,6 @@ components:
           enum:
           - simple
           - extended
-    TokensResponse:
-      type: object
-      properties:
-        tokens:
-          type: array
-          items:
-            type: object
-            properties:
-              text:
-                type: string
-              ner:
-                type: string
-              start:
-                type: integer
-              end:
-                type: integer
-        time:
-          type: number
   securitySchemes:
     apiKey:
       type: apiKey
