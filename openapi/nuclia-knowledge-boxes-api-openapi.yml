@@ -96,18 +96,14 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
 components:
+  responses:
+    Forbidden:
+      description: The API key does not grant the required role for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    KnowledgeBox:
-      type: object
-      properties:
-        uuid:
-          type: string
-        slug:
-          type: string
-        title:
-          type: string
-        config:
-          type: object
     Counters:
       type: object
       properties:
@@ -119,6 +115,11 @@ components:
           type: integer
         sentences:
           type: integer
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
     LabelSet:
       type: object
       properties:
@@ -139,18 +140,17 @@ components:
             properties:
               title:
                 type: string
-    Error:
+    KnowledgeBox:
       type: object
       properties:
-        detail:
+        uuid:
           type: string
-  responses:
-    Forbidden:
-      description: The API key does not grant the required role for this operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        slug:
+          type: string
+        title:
+          type: string
+        config:
+          type: object
   parameters:
     Kbid:
       name: kbid
