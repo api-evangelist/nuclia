@@ -178,6 +178,35 @@ paths:
                 type: object
 components:
   schemas:
+    SummarizeRequest:
+      type: object
+      properties:
+        resources:
+          type: array
+          items:
+            type: string
+        generative_model:
+          type: string
+        summary_kind:
+          type: string
+          enum:
+          - simple
+          - extended
+    PredictChatRequest:
+      type: object
+      required:
+      - question
+      properties:
+        question:
+          type: string
+        query_context:
+          type: array
+          items:
+            type: string
+        user_id:
+          type: string
+        generative_model:
+          type: string
     TokensResponse:
       type: object
       properties:
@@ -196,35 +225,6 @@ components:
                 type: integer
         time:
           type: number
-    PredictChatRequest:
-      type: object
-      required:
-      - question
-      properties:
-        question:
-          type: string
-        query_context:
-          type: array
-          items:
-            type: string
-        user_id:
-          type: string
-        generative_model:
-          type: string
-    SummarizeRequest:
-      type: object
-      properties:
-        resources:
-          type: array
-          items:
-            type: string
-        generative_model:
-          type: string
-        summary_kind:
-          type: string
-          enum:
-          - simple
-          - extended
   securitySchemes:
     apiKey:
       type: apiKey

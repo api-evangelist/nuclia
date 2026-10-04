@@ -76,7 +76,50 @@ paths:
                   summary:
                     type: string
 components:
+  parameters:
+    Kbid:
+      name: kbid
+      in: path
+      required: true
+      description: Unique identifier of the Knowledge Box.
+      schema:
+        type: string
   schemas:
+    SummarizeRequest:
+      type: object
+      properties:
+        resources:
+          type: array
+          items:
+            type: string
+        generative_model:
+          type: string
+        summary_kind:
+          type: string
+          enum:
+          - simple
+          - extended
+    AskResponse:
+      type: object
+      properties:
+        answer:
+          type: string
+          description: The generated answer text. Streamed incrementally when not synchronous.
+        relations:
+          type: object
+        retrieval_results:
+          $ref: '#/components/schemas/FindResults'
+        citations:
+          type: object
+          description: Mapping of cited resources / paragraphs supporting the answer.
+        learning_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - error
+          - no_context
     FindResults:
       type: object
       properties:
@@ -134,49 +177,6 @@ components:
           type: boolean
         max_tokens:
           type: integer
-    SummarizeRequest:
-      type: object
-      properties:
-        resources:
-          type: array
-          items:
-            type: string
-        generative_model:
-          type: string
-        summary_kind:
-          type: string
-          enum:
-          - simple
-          - extended
-    AskResponse:
-      type: object
-      properties:
-        answer:
-          type: string
-          description: The generated answer text. Streamed incrementally when not synchronous.
-        relations:
-          type: object
-        retrieval_results:
-          $ref: '#/components/schemas/FindResults'
-        citations:
-          type: object
-          description: Mapping of cited resources / paragraphs supporting the answer.
-        learning_id:
-          type: string
-        status:
-          type: string
-          enum:
-          - success
-          - error
-          - no_context
-  parameters:
-    Kbid:
-      name: kbid
-      in: path
-      required: true
-      description: Unique identifier of the Knowledge Box.
-      schema:
-        type: string
   securitySchemes:
     apiKey:
       type: apiKey

@@ -190,13 +190,6 @@ paths:
                 $ref: '#/components/schemas/ResourceCreated'
 components:
   parameters:
-    Rid:
-      name: rid
-      in: path
-      required: true
-      description: Unique identifier of the resource.
-      schema:
-        type: string
     Kbid:
       name: kbid
       in: path
@@ -204,25 +197,48 @@ components:
       description: Unique identifier of the Knowledge Box.
       schema:
         type: string
-  responses:
-    Forbidden:
-      description: The API key does not grant the required role for this operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested object was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Rid:
+      name: rid
+      in: path
+      required: true
+      description: Unique identifier of the resource.
+      schema:
+        type: string
   schemas:
-    Error:
+    Resource:
       type: object
       properties:
-        detail:
+        id:
           type: string
+        slug:
+          type: string
+        title:
+          type: string
+        summary:
+          type: string
+        created:
+          type: string
+          format: date-time
+        data:
+          type: object
+        extracted:
+          type: object
+    ResourceList:
+      type: object
+      properties:
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+        pagination:
+          type: object
+          properties:
+            page:
+              type: integer
+            size:
+              type: integer
+            total:
+              type: integer
     ResourceCreated:
       type: object
       properties:
@@ -230,6 +246,11 @@ components:
           type: string
         seqid:
           type: integer
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
     CreateResourcePayload:
       type: object
       properties:
@@ -274,40 +295,19 @@ components:
             properties:
               uri:
                 type: string
-    Resource:
-      type: object
-      properties:
-        id:
-          type: string
-        slug:
-          type: string
-        title:
-          type: string
-        summary:
-          type: string
-        created:
-          type: string
-          format: date-time
-        data:
-          type: object
-        extracted:
-          type: object
-    ResourceList:
-      type: object
-      properties:
-        resources:
-          type: array
-          items:
-            $ref: '#/components/schemas/Resource'
-        pagination:
-          type: object
-          properties:
-            page:
-              type: integer
-            size:
-              type: integer
-            total:
-              type: integer
+  responses:
+    NotFound:
+      description: The requested object was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: The API key does not grant the required role for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKey:
       type: apiKey

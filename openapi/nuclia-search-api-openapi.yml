@@ -118,18 +118,6 @@ components:
           type: number
         rephrase:
           type: boolean
-    FindResults:
-      type: object
-      properties:
-        resources:
-          type: object
-          description: Resources keyed by id, each with scored matching paragraphs.
-        relations:
-          type: object
-        total:
-          type: integer
-        next_page:
-          type: boolean
     SearchResults:
       type: object
       properties:
@@ -141,6 +129,18 @@ components:
           type: object
         relations:
           type: object
+        next_page:
+          type: boolean
+    FindResults:
+      type: object
+      properties:
+        resources:
+          type: object
+          description: Resources keyed by id, each with scored matching paragraphs.
+        relations:
+          type: object
+        total:
+          type: integer
         next_page:
           type: boolean
   parameters:
