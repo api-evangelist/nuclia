@@ -204,6 +204,9 @@ apis:
   - type: APIReference
     url: https://docs.nuclia.dev/docs/nua-api/
 common:
+- type: CapabilityMap
+  url: capabilities/nuclia-capability-edges.yml
+  name: Nuclia Business Capability Map
 - type: AgenticAccess
   url: agentic-access/nuclia-agentic-access.yml
 - type: TrustCenter

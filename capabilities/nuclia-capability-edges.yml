@@ -1,0 +1,36 @@
+slug: nuclia
+provider: Nuclia
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Predict
+  spec_file: nuclia-predict-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.85
+  evidence: POST /v1/predict/chat  Predict - generative chat; GET /v1/predict/sentence  Predict - embed
+    sentence; GET /v1/predict/models  Predict - list models
+  reason: These are direct model-inference endpoints — generation, embedding, tokenization/NER, reranking
+    and model listing — i.e. operation of AI/ML models, squarely Artificial Intelligence Management.
+- tag: Ask
+  spec_file: nuclia-ask-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.7
+  evidence: 'POST /v1/kb/{kbid}/ask  Ask a Knowledge Box (RAG generative answer); schemas: AskRequest,
+    AskResponse'
+  reason: Generative grounded-answer and summarization endpoints over indexed content are an AI/ML inference
+    service, fitting Artificial Intelligence Management. Could alternatively be read as knowledge sharing,
+    hence moderate confidence.
