@@ -1,222 +1,51 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Nuclia
-providerId: nuclia
-created: '2026-06-20'
-modified: '2026-06-20'
-reconciled: true
-tags:
-- AI
-- RAG
-- Search
-- Knowledge Base
-- Unstructured Data
-- Plans
-description: >-
-  Nuclia (Progress Agentic RAG) sells flat monthly subscription tiers - Starter,
-  Pro and Enterprise - each bundling a quota of indexed data (GB or resources),
-  a monthly allowance of Nuclia tokens, and a number of Knowledge Boxes. Usage
-  above the included token allowance is billed at a per-token overage rate, and
-  extra indexed data consumes tokens. A 14-day free trial is available on the
-  Starter plan.
-notes: >-
-  Pricing reflects the published Progress Agentic RAG / Nuclia pricing page as of
-  2026-06-20 and is subject to change; verify current tiers, quotas and the
-  per-token overage rate on the pricing page during reconciliation.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://www.progress.com/agentic-rag/pricing
 sources:
-- https://nuclia.com/pricing/
 - https://www.progress.com/agentic-rag/pricing
-- https://docs.nuclia.dev/docs
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T112025
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: tiered-subscription
+delivery:
+  delivery: managed+licensed
+  method: page
+  read: '2026-10-07'
+  evidence: Designed for large-scale deployments with unlimited scalability, on-prem options and advanced
+    support.
+  managed_tier: Starter
+published: true
+note: Progress Agentic RAG (Nuclia) tiered pricing with token consumption overage; 14-day free trial;
+  Enterprise is custom quote with on-prem/hybrid options.
+plan_count: 3
+currency: USD
 plans:
-- id: nuclia-starter
-  name: Starter
-  type: subscription
-  description: >-
-    Entry tier with a 14-day free trial. Text-based files only, community
-    support, single Knowledge Box.
-  entries:
-  - label: Monthly Subscription
-    name: starter_subscription
-    type: flat
-    metric: subscription
-    limit: 1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: $700 per month
-    userMultiplied: false
-  - label: Indexed Data
-    name: indexed_data
-    type: included
-    metric: storage
-    limit: 5
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: 5GB or 15,000 resources included
-    userMultiplied: false
-  - label: Knowledge Boxes
-    name: knowledge_boxes
-    type: included
-    metric: knowledge_boxes
-    limit: 1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: 1 included
-    userMultiplied: false
-  - label: Included Tokens
-    name: included_tokens
-    type: included
-    metric: tokens
-    limit: 10000
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: 10,000 tokens/month included
-    userMultiplied: false
-  - label: Token Overage
-    name: token_overage
-    type: usage
-    metric: tokens
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: $0.008 per token
-    userMultiplied: false
-  - label: Max File Size
-    name: max_file_size
-    type: included
-    metric: file_size
-    limit: 750
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: 750MB per file, text-based files only
-    userMultiplied: false
-  elements:
-  - name: RAG
-  - name: Q&A
-  - name: Community Support
-- id: nuclia-pro
-  name: Pro
-  type: subscription
-  description: >-
-    Mid tier adding all file types, AI classification, generative search, AI
-    Assistant and document summarization, with two Knowledge Boxes included.
-  entries:
-  - label: Monthly Subscription
-    name: pro_subscription
-    type: flat
-    metric: subscription
-    limit: 1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: $1,925 per month
-    userMultiplied: false
-  - label: Indexed Data
-    name: indexed_data
-    type: included
-    metric: storage
-    limit: 25
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: 25GB or 80,000 resources included
-    userMultiplied: false
-  - label: Knowledge Boxes
-    name: knowledge_boxes
-    type: included
-    metric: knowledge_boxes
-    limit: 2
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: 2 included (up to 8 at $750/month extra each)
-    userMultiplied: false
-  - label: Included Tokens
-    name: included_tokens
-    type: included
-    metric: tokens
-    limit: 10000
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: 10,000 tokens/month included
-    userMultiplied: false
-  - label: Token Overage
-    name: token_overage
-    type: usage
-    metric: tokens
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: $0.008 per token
-    userMultiplied: false
-  - label: Max File Size
-    name: max_file_size
-    type: included
-    metric: file_size
-    limit: 1500
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: 1.5GB per file, all file types
-    userMultiplied: false
-  elements:
-  - name: RAG
-  - name: Q&A
-  - name: AI Classification
-  - name: Generative Search
-  - name: AI Assistant
-  - name: Document Summarization
-- id: nuclia-enterprise
-  name: Enterprise
-  type: enterprise
-  description: >-
-    Custom tier with unlimited indexed data and file size, all capabilities
-    including Prompt LAB and RAG LAB, private Slack support and extended
-    onboarding. Contact sales.
-  entries:
-  - label: Enterprise Agreement
-    name: enterprise
-    type: flat
-    metric: contract
-    limit: -1
-    timeFrame: year
-    geo: global
-    unit: 1
-    price: custom quote
-    userMultiplied: false
-  - label: Included Tokens
-    name: included_tokens
-    type: included
-    metric: tokens
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: per custom agreement
-    userMultiplied: false
-  - label: Token Overage
-    name: token_overage
-    type: usage
-    metric: tokens
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: $0.008 per token
-    userMultiplied: false
-  elements:
-  - name: Unlimited Indexed Data
-  - name: Prompt LAB
-  - name: RAG LAB
-  - name: Private Slack Support
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+- name: Starter
+  price_text: $700/month*
+  price: 700
+  currency: USD
+  period: month
+  included_quota: Max 750MB per file, text-based files only; 5GB indexed data or 15k resources; up to
+    10,000 tokens per month; 1 Knowledge Box; RAG, Q&A; Community support
+  overage: additional usage cost is $.008/token
+- name: Pro
+  price_text: $1,925/month*
+  price: 1925
+  currency: USD
+  period: month
+  included_quota: Max 1.5GB per file, all file types; 25GB indexed data or 80k resources; up to 10,000
+    tokens per month after the first 3 months; 2 Knowledge Boxes (up to 8); Community support + ZenDesk
+  overage: $0.008 per token; $750/month/extra KB
+- name: Enterprise
+  price_text: Contact Us
+  period: none
+  included_quota: Unlimited file size and indexed data; Prompt LAB + RAG LAB; Private Slack Channel +
+    ZenDesk; Cloud & Hybrid NucliaDB
+  overage: Consumption price per token $0.008
+rate_limit_statements:
+- Price includes your use of up to 10,000 tokens per month; additional usage cost is $.008/token. The
+  10k free tokens expire at the end of each month.
+- Each extra GB of indexed data is priced at 500 tokens/month billed via consumption pricing.
