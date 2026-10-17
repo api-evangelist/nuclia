@@ -99,39 +99,6 @@ components:
           enum:
           - simple
           - extended
-    AskResponse:
-      type: object
-      properties:
-        answer:
-          type: string
-          description: The generated answer text. Streamed incrementally when not synchronous.
-        relations:
-          type: object
-        retrieval_results:
-          $ref: '#/components/schemas/FindResults'
-        citations:
-          type: object
-          description: Mapping of cited resources / paragraphs supporting the answer.
-        learning_id:
-          type: string
-        status:
-          type: string
-          enum:
-          - success
-          - error
-          - no_context
-    FindResults:
-      type: object
-      properties:
-        resources:
-          type: object
-          description: Resources keyed by id, each with scored matching paragraphs.
-        relations:
-          type: object
-        total:
-          type: integer
-        next_page:
-          type: boolean
     AskRequest:
       type: object
       required:
@@ -177,6 +144,39 @@ components:
           type: boolean
         max_tokens:
           type: integer
+    FindResults:
+      type: object
+      properties:
+        resources:
+          type: object
+          description: Resources keyed by id, each with scored matching paragraphs.
+        relations:
+          type: object
+        total:
+          type: integer
+        next_page:
+          type: boolean
+    AskResponse:
+      type: object
+      properties:
+        answer:
+          type: string
+          description: The generated answer text. Streamed incrementally when not synchronous.
+        relations:
+          type: object
+        retrieval_results:
+          $ref: '#/components/schemas/FindResults'
+        citations:
+          type: object
+          description: Mapping of cited resources / paragraphs supporting the answer.
+        learning_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - error
+          - no_context
   securitySchemes:
     apiKey:
       type: apiKey

@@ -87,6 +87,19 @@ paths:
                 type: object
 components:
   schemas:
+    SearchResults:
+      type: object
+      properties:
+        resources:
+          type: object
+        sentences:
+          type: object
+        paragraphs:
+          type: object
+        relations:
+          type: object
+        next_page:
+          type: boolean
     SearchRequest:
       type: object
       required:
@@ -117,19 +130,6 @@ components:
         min_score:
           type: number
         rephrase:
-          type: boolean
-    SearchResults:
-      type: object
-      properties:
-        resources:
-          type: object
-        sentences:
-          type: object
-        paragraphs:
-          type: object
-        relations:
-          type: object
-        next_page:
           type: boolean
     FindResults:
       type: object
