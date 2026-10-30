@@ -1,4 +1,4 @@
-# Nuclia (nuclia)
+# Nuclia
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,142 +66,143 @@
 
 Nuclia is a RAG-as-a-Service / AI search platform (now part of Progress as Progress Agentic RAG). It ingests unstructured data - documents, files, audio, video, web pages and conversations - into Knowledge Boxes, automatically extracting, embedding and indexing it so applications can run hybrid (semantic, keyword, graph) search and get grounded generative answers through a regional REST API.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/nuclia/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/nuclia/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · RAG · Search · Knowledge Base · Unstructured Data · Real-Time
 
-## Tags
+## Nuclia on APIs.io
 
-- AI
-- RAG
-- Search
-- Knowledge Base
-- Unstructured Data
+Everything profiled for Nuclia is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/nuclia/](https://apis.io/providers/nuclia/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (5)
 
-- **Created:** 2026-06-20
-- **Modified:** 2026-06-20
+- [Nuclia Ask API](https://apis.io/apis/nuclia/nuclia-ask-api/) — Generative RAG answers, chat and summarization grounded in a Knowledge Box.
+- [Nuclia Knowledge Boxes API](https://apis.io/apis/nuclia/nuclia-knowledge-boxes-api/) — Create, configure and inspect Knowledge Boxes and their label sets.
+- [Nuclia Predict API](https://apis.io/apis/nuclia/nuclia-predict-api/) — Nuclia Understanding API (NUA) - generation, summarize, rephrase, rerank, embeddings and tokenization.
+- [Nuclia Resources API](https://apis.io/apis/nuclia/nuclia-resources-api/) — Ingest and manage resources - files, text, links and conversations.
+- [Nuclia Search API](https://apis.io/apis/nuclia/nuclia-search-api/) — Hybrid search, find (RAG retrieval) and suggest over a Knowledge Box.
 
-## APIs
+### Published properties
 
-### Nuclia Knowledge Boxes API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Create, configure and inspect Knowledge Boxes - the indexed collections of unstructured data - including counters, label sets, synonyms, entities and model configuration.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://docs.nuclia.dev/docs/api](https://docs.nuclia.dev/docs/api)
-- **Base URL:** `https://{zone}.nuclia.cloud/api/v1`
+Event-driven and webhook contracts.
 
-#### Tags
+- [Nuclia Ask / Chat Generative Answer Stream (HTTP + ndjson/SSE)](https://apis.io/asyncapis/nuclia/nuclia-asyncapi/)
 
-- Knowledge Boxes
-- Configuration
-- Labels
+#### Event channels (1)
 
-#### Properties
+Individual events and webhooks the provider emits.
 
-- [Documentation](https://docs.nuclia.dev/docs/management/knowledgebox/)
-- [API Reference](https://docs.nuclia.dev/docs/api)
-- [OpenAPI](openapi/nuclia-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/nuclia.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/nuclia.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [/kb/{kbid}/ask](https://apis.io/channels/nuclia/kb-kbid-ask/)
 
-### Nuclia Resources & Ingestion API
+#### Agentic access (1)
 
-Create, list, read, modify and delete resources, and upload binaries (including TUS resumable uploads and direct Knowledge Box upload) into Nuclia's extraction, embedding and indexing pipeline.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://docs.nuclia.dev/docs/api](https://docs.nuclia.dev/docs/api)
-- **Base URL:** `https://{zone}.nuclia.cloud/api/v1`
+- [Nuclia Agentic Access](https://apis.io/agentic-access/nuclia/nuclia-agentic-access/)
 
-#### Tags
+#### Collections (6)
 
-- Resources
-- Ingestion
-- Upload
+Postman and Open Collection request collections.
 
-#### Properties
+- [Nuclia RAG-as-a-Service API](https://apis.io/collections/nuclia/open-nuclia/)
+- [Nuclia RAG-as-a-Service Ask API](https://apis.io/collections/nuclia/open-nuclia-ask-api/)
+- [Nuclia RAG-as-a-Service Ask Knowledge Boxes API](https://apis.io/collections/nuclia/open-nuclia-knowledge-boxes-api/)
+- [Nuclia RAG-as-a-Service Ask Predict API](https://apis.io/collections/nuclia/open-nuclia-predict-api/)
+- [Nuclia RAG-as-a-Service Ask Resources API](https://apis.io/collections/nuclia/open-nuclia-resources-api/)
+- [Nuclia RAG-as-a-Service Ask Search API](https://apis.io/collections/nuclia/open-nuclia-search-api/)
 
-- [Documentation](https://docs.nuclia.dev/docs/ingestion/)
-- [API Reference](https://docs.nuclia.dev/docs/api)
-- [OpenAPI](openapi/nuclia-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/nuclia.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/nuclia.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Governance rules (1)
 
-### Nuclia Search & Find API
+Spectral rulesets for the provider's contracts.
 
-Hybrid search combining semantic, keyword, fulltext and graph search, the find endpoint optimized for RAG context retrieval, plus suggest autocomplete over a Knowledge Box.
+- [Nuclia — asyncapi rules](https://apis.io/rules/nuclia/nuclia-asyncapi-spectral-rules/)
 
-- **Human URL:** [https://docs.nuclia.dev/docs/rag/search-strategy/](https://docs.nuclia.dev/docs/rag/search-strategy/)
-- **Base URL:** `https://{zone}.nuclia.cloud/api/v1`
+#### Security (3)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Search
-- Find
-- Semantic Search
+- [Nuclia Authentication](https://apis.io/security/nuclia/nuclia-authentication/)
+- [Nuclia Domain Security](https://apis.io/security/nuclia/nuclia-domain-security/)
+- [Nuclia Trust Center](https://apis.io/security/nuclia/nuclia-trust-center/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://docs.nuclia.dev/docs/rag/search-strategy/)
-- [API Reference](https://docs.nuclia.dev/docs/api)
-- [OpenAPI](openapi/nuclia-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/nuclia.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/nuclia.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published plans, tiers and prices.
 
-### Nuclia Ask & Chat (RAG) API
+- [Nuclia Plans Pricing](https://apis.io/plans/nuclia/nuclia-plans-pricing/)
 
-Generative RAG answers grounded in a Knowledge Box - the ask/chat endpoint retrieves context, builds a prompt and returns a cited answer, streamed as newline-delimited JSON / SSE, plus document summarization.
+#### Rate limits (1)
 
-- **Human URL:** [https://docs.nuclia.dev/docs/rag/](https://docs.nuclia.dev/docs/rag/)
-- **Base URL:** `https://{zone}.nuclia.cloud/api/v1`
+Published request limits.
 
-#### Tags
+- [Nuclia Rate Limits](https://apis.io/rate-limits/nuclia/nuclia-rate-limits/)
 
-- Ask
-- Chat
-- RAG
-- Generative
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [Documentation](https://docs.nuclia.dev/docs/rag/)
-- [API Reference](https://docs.nuclia.dev/docs/api)
-- [OpenAPI](openapi/nuclia-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [AsyncAPI](asyncapi/nuclia-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/nuclia.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/nuclia.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Nuclia Finops](https://apis.io/finops/nuclia/nuclia-finops/)
 
-### Nuclia Predict (NUA) API
+## Where to find this API
 
-The Nuclia Understanding API - generative chat/completions, summarize, rephrase, rerank, sentence embeddings and token/NER extraction - authenticated with a NUA key.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://docs.nuclia.dev/docs/nua-api/](https://docs.nuclia.dev/docs/nua-api/)
-- **Base URL:** `https://{zone}.nuclia.cloud/api/v1`
-
-#### Tags
-
-- Predict
-- NUA
-- Embeddings
-- Tokens
-
-#### Properties
-
-- [Documentation](https://docs.nuclia.dev/docs/understanding/intro)
-- [API Reference](https://docs.nuclia.dev/docs/nua-api/)
-- [OpenAPI](openapi/nuclia-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/nuclia.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/nuclia.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/nuclia)
-- [LinkedIn](https://www.linkedin.com/company/nuclia)
 - [Website](https://nuclia.com/)
 - [Documentation](https://docs.nuclia.dev/docs)
-- [Plans](plans/nuclia-plans-pricing.yml)
-- [Rate Limits](rate-limits/nuclia-rate-limits.yml)
-- [Fin Ops](finops/nuclia-finops.yml)
+- [Blog](https://www.progress.com/blogs)
+- [GitHub](https://github.com/nuclia)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 32.4** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 56.5 |
+| Contract governance | 11.4 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 15.8 |
+
+**Agent readiness 19.0** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 15.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/nuclia/](https://apis.io/providers/nuclia/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Nuclia: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/nuclia/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
